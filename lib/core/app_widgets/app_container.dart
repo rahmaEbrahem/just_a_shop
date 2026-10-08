@@ -15,7 +15,7 @@ class AppContainer extends StatelessWidget {
         width: 341.w,
         height: 54.h,
         decoration: BoxDecoration(
-          color: AppColor.bordercolor,
+          color: AppColor.maincolor,
           borderRadius: BorderRadius.circular(15.r),
         ),
         child: Center(
