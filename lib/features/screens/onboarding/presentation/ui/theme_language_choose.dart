@@ -41,9 +41,15 @@ class _ThemeLanguageChooseState extends State<ThemeLanguageChoose> {
                       color: AppColor.maincolor,
                     ),
                   ),
+                  10.horizontalSpace,
+                  Icon(
+                    Icons.shopping_cart,
+                    size: 40,
+                    color: AppColor.containercolor,
+                  ),
                 ],
               ),
-              100.verticalSpace,
+              120.verticalSpace,
               Text(
                 LocaleKeys.chooselanguage.tr(),
                 style: Theme.of(context).textTheme.titleLarge,
@@ -99,7 +105,7 @@ class _ThemeLanguageChooseState extends State<ThemeLanguageChoose> {
                   ),
                 ],
               ),
-              100.verticalSpace,
+              180.verticalSpace,
               AppContainer(
                 text: LocaleKeys.continuetext.tr(),
                 onTap: () async {

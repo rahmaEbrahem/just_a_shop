@@ -12,4 +12,8 @@ extension Navigation on BuildContext {
   dynamic pushNamedAndRemoveUntil(String route, bool predicate) {
     return Navigator.pushNamedAndRemoveUntil(this, route, (v) => predicate);
   }
+
+  void pushReplacemetNamed(String route) {
+    Navigator.pushReplacementNamed(this, route);
+  }
 }
