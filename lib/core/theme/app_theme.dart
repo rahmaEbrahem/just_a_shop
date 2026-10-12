@@ -27,7 +27,7 @@ class AppTheme {
     ),
     fontFamily: 'Poppins',
     textTheme: TextTheme(
-      headlineMedium: TextStyle(fontSize: 30.sp, fontWeight: FontWeight(900)),
+      headlineMedium: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w800),
       titleLarge: TextStyle(fontSize: 20.sp, fontWeight: FontWeight(500)),
       titleMedium: TextStyle(fontSize: 18.sp, fontWeight: FontWeight(400)),
       titleSmall: TextStyle(fontSize: 15.sp, fontWeight: FontWeight(400)),
