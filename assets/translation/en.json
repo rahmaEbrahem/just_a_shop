@@ -9,5 +9,25 @@
 "choosetitle":"Shop With Ease",
 "completetilte":"Checkout securely",
 "completedesc":"Review your order, pay securely, and enjoy a smooth shopping experience.",
-"getbutton":"Get Started"
+"getbutton":"Get Started",
+"registertitle":"Create an Account",
+"nametitle":"Full name",
+"namefield":"Enter your full name",
+"emailfield":"Enter your email address",
+"emailtitle":"Email",
+"passwordtitle":"Password",
+"paswordfield":"Enter your Password",
+"googletitle":"Sign up with Google",
+"facetitle":"Sign up with facebook",
+"alreadytitle":"Already have an acccount?",
+"logintitle":"Login",
+"loginaccount":"Login to your account",
+"welcometitle":"it's great to see you again",
+"ortitle":"Or",
+"googlelogin":"Login with Google",
+"facelogin":"Login with Facebook",
+"signuptitle":"Don't have an account?",
+"signup":"Join"
+
+
 }
