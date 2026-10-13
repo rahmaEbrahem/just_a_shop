@@ -4,7 +4,7 @@
 
 abstract class LocaleKeys {
   static const chooselanguage = 'chooselanguage';
-  static const choosetheme = 'choose theme';
+  static const choosetheme = 'choosetheme';
   static const continuetext = 'continuetext';
   static const light = 'light';
   static const dark = 'dark';
