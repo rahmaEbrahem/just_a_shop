@@ -1,6 +1,5 @@
 import 'package:e_commerce_app/core/app_widgets/app_container.dart';
 import 'package:e_commerce_app/core/helper/extentions/extension.dart';
-import 'package:e_commerce_app/core/routes/app_routes.dart';
 import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/core/storage/settings_model.dart';
 import 'package:e_commerce_app/core/storage/settings_storage.dart';
