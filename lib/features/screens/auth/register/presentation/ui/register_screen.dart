@@ -7,9 +7,13 @@ import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/screens/auth/login/login_with_facebook/login_with_facebook.dart';
 import 'package:e_commerce_app/features/screens/auth/login/login_with_google/login_with_google.dart';
+import 'package:e_commerce_app/features/screens/auth/register/data/api_data/model/register_req_model.dart';
+import 'package:e_commerce_app/features/screens/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:e_commerce_app/features/screens/auth/register/presentation/ui/widget/register_bloc_listen.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -45,6 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  RegisterBlocListen(),
                   20.verticalSpace,
                   Text(
                     LocaleKeys.registertitle.tr(),
@@ -57,6 +62,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   10.verticalSpace,
                   AppTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your full name';
+                      }
+                      return null;
+                    },
                     controller: namecontroller,
                     text: LocaleKeys.namefield.tr(),
                     keyboardtype: TextInputType.name,
@@ -68,6 +79,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   10.verticalSpace,
                   AppTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return LocaleKeys.emailcheck.tr();
+                      }
+                      if (!value.contains('@')) {
+                        return LocaleKeys.validemail.tr();
+                      }
+                      return null;
+                    },
                     controller: emailcontroller,
                     text: LocaleKeys.emailfield.tr(),
                     keyboardtype: TextInputType.emailAddress,
@@ -79,6 +99,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   10.verticalSpace,
                   AppTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return LocaleKeys.passcheck.tr();
+                      }
+                      if (value.length < 6) {
+                        return LocaleKeys.passrole.tr();
+                      }
+                      return null;
+                    },
                     controller: passwordcontroller,
                     text: LocaleKeys.paswordfield.tr(),
                     keyboardtype: TextInputType.visiblePassword,
@@ -87,7 +116,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   20.verticalSpace,
                   AppContainer(
                     text: LocaleKeys.registertitle.tr(),
-                    onTap: () {},
+                    onTap: () {
+                      if (formkey.currentState!.validate()) {
+                        context.read<RegisterCubit>().registerState(
+                          RegisterReqModel(
+                            userName: namecontroller.text,
+                            email: emailcontroller.text,
+                            password: passwordcontroller.text,
+                          ),
+                        );
+                      }
+                    },
                   ),
                   15.verticalSpace,
                   AuthDivider(),
@@ -106,16 +145,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onTap: () async {
                       var user = await signInWithFacebook(context);
                       if (user != null) {
-                        print('مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}');
+                        print(
+                          'مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}',
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                           SnackBar(
-                            content: Text('فشل تسجيل الدخول بواسطة فيسبوك، حاول مرة أخرى'),
-                            backgroundColor:AppColor.containercolor,
+                          SnackBar(
+                            content: Text(
+                              'فشل تسجيل الدخول بواسطة فيسبوك، حاول مرة أخرى',
+                            ),
+                            backgroundColor: AppColor.containercolor,
                           ),
                         );
                       }
-                    }, 
+                    },
                     containcolor: AppColor.secondarycolor,
                     icon: 'assets/icons/facebook-3-logo-svgrepo-com.svg',
                   ),
