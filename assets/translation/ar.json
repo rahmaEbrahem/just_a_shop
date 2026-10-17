@@ -27,4 +27,9 @@
 "googlelogin":"تسجيل الدخول باستخدام Google",
 "facelogin":"تسجيل الدخول باستخدام facebook",
 "signuptitle":"ليس لديك حساب؟",
-"signup":"انشاء حساب"}
+"signup":"انشاء حساب",
+"login successfully":"تم تسجيل الدخول بنجاح ",
+"faild please try again":"فشل تسجيل الدخول برجاء المحاوله مره اخري"
+
+
+}

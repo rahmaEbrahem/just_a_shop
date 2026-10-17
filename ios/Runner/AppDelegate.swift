@@ -1,6 +1,7 @@
 import Flutter
 import UIKit
 import FBSDKCoreKit 
+import GoogleSignIn 
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -8,7 +9,6 @@ import FBSDKCoreKit
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    // تفعيل إعدادات فيسبوك SDK
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     
     GeneratedPluginRegistrant.register(with: self)
@@ -20,6 +20,11 @@ import FBSDKCoreKit
     open url: URL,
     options: [UIApplication.OpenURLOptionsKey : Any] = [:]
   ) -> Bool {
+    let handledByGoogle = GIDSignIn.sharedInstance.handle(url)
+    if handledByGoogle {
+      return true
+    }
+    
     return ApplicationDelegate.shared.application(app, open: url, options: options)
   }
 }
