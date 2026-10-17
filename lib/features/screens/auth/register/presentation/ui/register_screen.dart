@@ -5,6 +5,8 @@ import 'package:e_commerce_app/core/app_widgets/divider/auth_divider.dart';
 import 'package:e_commerce_app/core/helper/extentions/extension.dart';
 import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors.dart';
+import 'package:e_commerce_app/features/screens/auth/login/login_with_facebook/login_with_facebook.dart';
+import 'package:e_commerce_app/features/screens/auth/login/login_with_google/login_with_google.dart';
 import 'package:e_commerce_app/features/screens/auth/register/data/api_data/model/register_req_model.dart';
 import 'package:e_commerce_app/features/screens/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:e_commerce_app/features/screens/auth/register/presentation/ui/widget/register_bloc_listen.dart';
@@ -130,15 +132,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   AuthDivider(),
                   30.verticalSpace,
                   AuthContainer(
-                    text: LocaleKeys.googletitle.tr(),
-                    onTap: () {},
+                    text: LocaleKeys.googlelogin.tr(),
+                    onTap: () async {
+                      await signInWithGoogle(context);
+                    },
                     containcolor: Colors.white,
                     icon: 'assets/icons/google-icon-logo-svgrepo-com.svg',
                   ),
                   20.verticalSpace,
                   AuthContainer(
-                    text: LocaleKeys.facetitle.tr(),
-                    onTap: () {},
+                    text: LocaleKeys.facelogin.tr(),
+                    onTap: () async {
+                      var user = await signInWithFacebook(context);
+                      if (user != null) {
+                        print(
+                          'مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}',
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'فشل تسجيل الدخول بواسطة فيسبوك، حاول مرة أخرى',
+                            ),
+                            backgroundColor: AppColor.containercolor,
+                          ),
+                        );
+                      }
+                    },
                     containcolor: AppColor.secondarycolor,
                     icon: 'assets/icons/facebook-3-logo-svgrepo-com.svg',
                   ),

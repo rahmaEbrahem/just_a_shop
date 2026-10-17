@@ -45,6 +45,5 @@ class AuthContainer extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

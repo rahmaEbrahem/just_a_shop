@@ -1,11 +1,9 @@
-import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/core/storage/settings_model.dart';
 import 'package:e_commerce_app/core/storage/settings_storage.dart';
 import 'package:e_commerce_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 part 'theme_state.dart';
 

@@ -28,6 +28,8 @@
 "facelogin":"Login with Facebook",
 "signuptitle":"Don't have an account?",
 "signup":"Join",
+"login successfully":"login successfully",
+"faild please try again":"faild please try again",
 "emailcheck":"Please enter your email",
 "validemail":"Please enter a valid email",
 "passcheck":"Please enter your password",
