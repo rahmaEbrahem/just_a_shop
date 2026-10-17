@@ -95,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   AuthContainer(
                     text: LocaleKeys.googlelogin.tr(),
                     onTap: () async {
-                      await signInWithGoogle();
+                      await signInWithGoogle(context);
                     },
                     containcolor: Colors.white,
                     icon: 'assets/icons/google-icon-logo-svgrepo-com.svg',
@@ -104,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   AuthContainer(
                     text: LocaleKeys.facelogin.tr(),
                     onTap: () async {
-                      var user = await signInWithFacebook();
+                      var user = await signInWithFacebook(context);
                       if (user != null) {
                         print('مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}');
                       } else {

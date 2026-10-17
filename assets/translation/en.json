@@ -27,7 +27,9 @@
 "googlelogin":"Login with Google",
 "facelogin":"Login with Facebook",
 "signuptitle":"Don't have an account?",
-"signup":"Join"
+"signup":"Join",
+"login successfully":"login successfully",
+"faild please try again":"faild please try again"
 
 
 }
