@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const chooselanguage = 'chooselanguage';
   static const choosetheme = 'choosetheme';
   static const continuetext = 'continuetext';
@@ -33,4 +33,19 @@ abstract class LocaleKeys {
   static const facelogin = 'facelogin';
   static const signuptitle = 'signuptitle';
   static const signup = 'signup';
+  static const emailcheck = 'emailcheck';
+  static const validemail = 'validemail';
+  static const passcheck = 'passcheck';
+  static const passrole = 'passrole';
+  static const unexpected = 'unexpected';
+  static const unauth = 'unauth';
+  static const forbidden = 'forbidden';
+  static const notfound = 'notfound';
+  static const unprocessable = 'unprocessable';
+  static const servererror = 'servererror';
+  static const socket = 'socket';
+  static const deadline = 'deadline';
+  static const formatexception = 'formatexception';
+  static const exception = 'exception';
+
 }
