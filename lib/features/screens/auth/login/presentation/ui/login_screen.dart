@@ -5,6 +5,8 @@ import 'package:e_commerce_app/core/app_widgets/divider/auth_divider.dart';
 import 'package:e_commerce_app/core/helper/extentions/extension.dart';
 import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors.dart';
+import 'package:e_commerce_app/features/screens/auth/login/login_with_facebook/login_with_facebook.dart';
+import 'package:e_commerce_app/features/screens/auth/login/login_with_google/login_with_google.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -81,14 +83,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   30.verticalSpace,
                   AuthContainer(
                     text: LocaleKeys.googlelogin.tr(),
-                    onTap: () {},
+                    onTap: () async {
+                      await signInWithGoogle();
+                    },
                     containcolor: Colors.white,
                     icon: 'assets/icons/google-icon-logo-svgrepo-com.svg',
                   ),
                   20.verticalSpace,
                   AuthContainer(
                     text: LocaleKeys.facelogin.tr(),
-                    onTap: () {},
+                    onTap: () async {
+                      var user = await signInWithFacebook();
+                      if (user != null) {
+                        print('مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(
+                            content: Text('فشل تسجيل الدخول بواسطة فيسبوك، حاول مرة أخرى'),
+                            backgroundColor:AppColor.containercolor,
+                          ),
+                        );
+                      }
+                    }, 
                     containcolor: AppColor.secondarycolor,
                     icon: 'assets/icons/facebook-3-logo-svgrepo-com.svg',
                   ),

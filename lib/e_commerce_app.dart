@@ -1,7 +1,6 @@
 import 'package:e_commerce_app/core/routes/app_routes.dart';
 import 'package:e_commerce_app/core/storage/settings_storage.dart';
 import 'package:e_commerce_app/core/theme/cubit/theme_cubit.dart';
-import 'package:e_commerce_app/features/screens/onboarding/presentation/ui/onboarding.dart';
 import 'package:e_commerce_app/features/screens/onboarding/presentation/ui/theme_language_choose.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
