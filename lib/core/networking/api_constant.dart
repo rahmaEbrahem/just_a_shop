@@ -1,3 +1,3 @@
 class ApiConstants {
-  static final String baseUrl = "https://api.freeapi.app/api/v1";
+  static final String baseUrl = "https://dummyjson.com";
 }
