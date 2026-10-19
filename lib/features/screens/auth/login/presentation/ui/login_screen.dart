@@ -7,9 +7,12 @@ import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/screens/auth/login/login_with_facebook/login_with_facebook.dart';
 import 'package:e_commerce_app/features/screens/auth/login/login_with_google/login_with_google.dart';
+import 'package:e_commerce_app/features/screens/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:e_commerce_app/features/screens/auth/login/presentation/ui/widgets/login_bloc_listener.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  LoginBlocListener(),
                   20.verticalSpace,
                   Text(
                     LocaleKeys.loginaccount.tr(),
@@ -60,6 +64,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   10.verticalSpace,
                   AppTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!value.contains('@')) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
                     controller: emailcontroller,
                     text: LocaleKeys.emailfield.tr(),
                     keyboardtype: TextInputType.emailAddress,
@@ -71,13 +84,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   10.verticalSpace,
                   AppTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      if (value.length < 6) {
+                        return 'Password must be at least 6 characters';
+                      }
+                      return null;
+                    },
                     controller: passwordcontroller,
                     text: LocaleKeys.paswordfield.tr(),
                     keyboardtype: TextInputType.visiblePassword,
                     ispassword: true,
                   ),
                   40.verticalSpace,
-                  AppContainer(text: LocaleKeys.logintitle.tr(), onTap: () {}),
+                  AppContainer(
+                    text: LocaleKeys.logintitle.tr(),
+                    onTap: () {
+                      if (formkey.currentState!.validate()) {
+                        context.read<LoginCubit>().login(
+                          emailcontroller.text.trim(),
+                          passwordcontroller.text,
+                        );
+                      }
+                    },
+                  ),
                   20.verticalSpace,
                   AuthDivider(),
                   30.verticalSpace,
@@ -95,16 +127,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () async {
                       var user = await signInWithFacebook(context);
                       if (user != null) {
-                        print('مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}');
+                        print(
+                          'مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}',
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                           SnackBar(
-                            content: Text('فشل تسجيل الدخول بواسطة فيسبوك، حاول مرة أخرى'),
-                            backgroundColor:AppColor.containercolor,
+                          SnackBar(
+                            content: Text(
+                              'فشل تسجيل الدخول بواسطة فيسبوك، حاول مرة أخرى',
+                            ),
+                            backgroundColor: AppColor.containercolor,
                           ),
                         );
                       }
-                    }, 
+                    },
                     containcolor: AppColor.secondarycolor,
                     icon: 'assets/icons/facebook-3-logo-svgrepo-com.svg',
                   ),
