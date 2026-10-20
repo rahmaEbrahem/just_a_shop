@@ -11,8 +11,18 @@
 "completedesc":"Review your order, pay securely, and enjoy a smooth shopping experience.",
 "getbutton":"Get Started",
 "registertitle":"Create an Account",
-"nametitle":"Full name",
-"namefield":"Enter your full name",
+"nametitle":"User name",
+"namefield":"Enter your user name",
+"firstname":"First Name",
+"lastname":"Last Name",
+"adress":"Adress",
+"city":"City",
+"firstfield":"Enter your first name",
+"lastfield":"Enter your last name",
+"adressfield":"Enter your adress",
+"cityfiled":"Enter your city",
+"countryfield":"Enter your country", 
+"country":"Country",
 "emailfield":"Enter your email address",
 "emailtitle":"Email",
 "passwordtitle":"Password",
@@ -28,8 +38,8 @@
 "facelogin":"Login with Facebook",
 "signuptitle":"Don't have an account?",
 "signup":"Join",
-"login successfully":"login successfully",
-"faild please try again":"faild please try again",
+"loginsuccessfully":"login successfully",
+"faildpleasetryagain":"faild please try again",
 "emailcheck":"Please enter your email",
 "validemail":"Please enter a valid email",
 "passcheck":"Please enter your password",
@@ -43,7 +53,6 @@
 "socket":"SocketException",
 "deadline":"Deadline",
 "formatexception":"FormatException",
-"exception":"Exception"
-
-
+"exception":"Exception",
+"invalidcredentials":"Invalid username or password"
 }

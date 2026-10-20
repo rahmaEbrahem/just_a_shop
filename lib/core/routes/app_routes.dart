@@ -1,12 +1,12 @@
 import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/features/home/presentation/ui/home_screen.dart';
-import 'package:e_commerce_app/features/screens/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:e_commerce_app/features/screens/auth/login/presentation/ui/login_screen.dart';
-import 'package:e_commerce_app/features/screens/auth/register/data/api_data/repo/register_repo.dart';
-import 'package:e_commerce_app/features/screens/auth/register/presentation/cubit/register_cubit.dart';
-import 'package:e_commerce_app/features/screens/auth/register/presentation/ui/register_screen.dart';
-import 'package:e_commerce_app/features/screens/onboarding/presentation/ui/onboarding.dart';
-import 'package:e_commerce_app/features/screens/onboarding/presentation/ui/theme_language_choose.dart';
+import 'package:e_commerce_app/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:e_commerce_app/features/auth/login/presentation/ui/login_screen.dart';
+import 'package:e_commerce_app/features/auth/register/data/api_data/repo/register_repo.dart';
+import 'package:e_commerce_app/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:e_commerce_app/features/auth/register/presentation/ui/register_screen.dart';
+import 'package:e_commerce_app/features/onboarding/presentation/ui/onboarding.dart';
+import 'package:e_commerce_app/features/onboarding/presentation/ui/theme_language_choose.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
