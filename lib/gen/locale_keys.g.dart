@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const chooselanguage = 'chooselanguage';
   static const choosetheme = 'choosetheme';
   static const continuetext = 'continuetext';
@@ -18,6 +18,16 @@ abstract class LocaleKeys {
   static const registertitle = 'registertitle';
   static const nametitle = 'nametitle';
   static const namefield = 'namefield';
+  static const firstname = 'firstname';
+  static const lastname = 'lastname';
+  static const adress = 'adress';
+  static const city = 'city';
+  static const country = 'country';
+  static const firstfield = 'firstfield';
+  static const lastfield = 'lastfield';
+  static const adressfield = 'adressfield';
+  static const cityfiled = 'cityfiled';
+  static const countryfield = 'countryfield';
   static const emailfield = 'emailfield';
   static const emailtitle = 'emailtitle';
   static const passwordtitle = 'passwordtitle';
@@ -33,4 +43,22 @@ abstract class LocaleKeys {
   static const facelogin = 'facelogin';
   static const signuptitle = 'signuptitle';
   static const signup = 'signup';
+  static const loginsuccessfully = 'loginsuccessfully';
+  static const faildpleasetryagain = 'faildpleasetryagain';
+  static const emailcheck = 'emailcheck';
+  static const validemail = 'validemail';
+  static const passcheck = 'passcheck';
+  static const passrole = 'passrole';
+  static const unexpected = 'unexpected';
+  static const unauth = 'unauth';
+  static const forbidden = 'forbidden';
+  static const notfound = 'notfound';
+  static const unprocessable = 'unprocessable';
+  static const servererror = 'servererror';
+  static const socket = 'socket';
+  static const deadline = 'deadline';
+  static const formatexception = 'formatexception';
+  static const exception = 'exception';
+  static const invalidcredentials = 'invalidcredentials';
+
 }

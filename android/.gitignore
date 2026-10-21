@@ -12,3 +12,13 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+
+android_old/
+app/
+build.gradle.kts
+gradle.properties
+gradle/
+settings.gradle.kts
+/android/build/
+/build/
+.flutter-plugins-dependencies
