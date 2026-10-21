@@ -156,7 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           LocaleKeys.signup.tr(),
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(color: AppColor.maincolor),
                         ),
                       ),
                     ],

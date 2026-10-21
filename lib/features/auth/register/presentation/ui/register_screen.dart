@@ -257,7 +257,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         child: Text(
                           LocaleKeys.logintitle.tr(),
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(color: AppColor.maincolor),
                         ),
                       ),
                     ],
