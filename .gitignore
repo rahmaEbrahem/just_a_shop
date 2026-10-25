@@ -1,6 +1,6 @@
 
 # Android / Gradle
-gradle-wrapper.jar
+
 /.gradle
 /captures/
 /gradlew

@@ -1,8 +1,6 @@
-gradle-wrapper.jar
+
 /.gradle
 /captures/
-/gradlew
-/gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
 .cxx/
@@ -14,11 +12,6 @@ key.properties
 **/*.jks
 
 android_old/
-app/
-build.gradle.kts
-gradle.properties
-gradle/
-settings.gradle.kts
 /android/build/
 /build/
 .flutter-plugins-dependencies
