@@ -6,10 +6,14 @@ import 'package:crypto/crypto.dart';
 import 'package:e_commerce_app/core/helper/extentions/extension.dart';
 import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors.dart';
+import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+AuthCredential? pendingFacebookCredential;
+String? pendingFacebookEmail;
 
 String generateRawNonce([int length = 32]) {
   const charset =
@@ -51,21 +55,37 @@ Future<User?> signInWithFacebook(BuildContext context) async {
       );
     }
 
-    if (result.status == LoginStatus.success) {
-      final AccessToken accessToken = result.accessToken!;
-
-      final AuthCredential credential;
-
-      if (Platform.isIOS && accessToken.type == AccessTokenType.limited) {
-        credential = OAuthProvider(
-          'facebook.com',
-        ).credential(idToken: accessToken.tokenString, rawNonce: rawNonce!);
-      } else {
-        credential = FacebookAuthProvider.credential(accessToken.tokenString);
+    if (result.status != LoginStatus.success || result.accessToken == null) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(LocaleKeys.facebookLoginFailed.tr()),
+            backgroundColor: AppColor.containercolor,
+          ),
+        );
       }
+      return null;
+    }
 
-      final UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithCredential(credential);
+    final accessToken = result.accessToken!;
+
+    final AuthCredential credential;
+
+    if (Platform.isIOS && accessToken.type == AccessTokenType.limited) {
+      credential = OAuthProvider(
+        'facebook.com',
+      ).credential(idToken: accessToken.tokenString, rawNonce: rawNonce!);
+    } else {
+      credential = FacebookAuthProvider.credential(accessToken.tokenString);
+    }
+
+    try {
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+
+      pendingFacebookCredential = null;
+      pendingFacebookEmail = null;
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -75,34 +95,41 @@ Future<User?> signInWithFacebook(BuildContext context) async {
             duration: const Duration(seconds: 3),
           ),
         );
+
         context.pushNamed(Routes.homescreen);
       }
 
       return userCredential.user;
-    } else {
-      print('فشل تسجيل الدخول: ${result.message}');
+    } on FirebaseAuthException catch (e) {
+      debugPrint('Facebook sign-in error: ${e.code}');
 
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'faild please try again: ${result.message ?? "تم إلغاء العملية"}',
-            ).tr(),
-            backgroundColor: AppColor.containercolor,
-            duration: const Duration(seconds: 3),
-          ),
-        );
+      if (e.code == 'account-exists-with-different-credential' &&
+          e.credential != null &&
+          e.email != null) {
+        pendingFacebookCredential = e.credential;
+        pendingFacebookEmail = e.email;
+
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(LocaleKeys.accountAlreadyExistsMessage.tr()),
+              duration: const Duration(seconds: 5),
+            ),
+          );
+        }
+
+        return null;
       }
 
-      return null;
+      rethrow;
     }
   } catch (e) {
-    print('خطأ أثناء تسجيل الدخول: $e');
+    debugPrint('Facebook sign-in error: $e');
 
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('faild please try again: $e'),
+          content: Text(LocaleKeys.facebookLoginFailed.tr()),
           backgroundColor: AppColor.containercolor,
           duration: const Duration(seconds: 3),
         ),

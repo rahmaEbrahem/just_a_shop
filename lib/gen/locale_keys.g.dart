@@ -60,5 +60,16 @@ abstract class  LocaleKeys {
   static const formatexception = 'formatexception';
   static const exception = 'exception';
   static const invalidcredentials = 'invalidcredentials';
+  static const accountAlreadyExists = 'accountAlreadyExists';
+  static const accountAlreadyExistsMessage = 'accountAlreadyExistsMessage';
+  static const continueWithGoogle = 'continueWithGoogle';
+  static const cancel = 'cancel';
+  static const facebookGoogleLinked = 'facebookGoogleLinked';
+  static const googleLoginSuccessFacebookLinkFailed = 'googleLoginSuccessFacebookLinkFailed';
+  static const facebookAccountAlreadyLinked = 'facebookAccountAlreadyLinked';
+  static const googleAccountMismatch = 'googleAccountMismatch';
+  static const facebookLoginFailed = 'facebookLoginFailed';
+  static const facebookLoginCancelled = 'facebookLoginCancelled';
+  static const googleLoginFailed = 'googleLoginFailed';
 
 }

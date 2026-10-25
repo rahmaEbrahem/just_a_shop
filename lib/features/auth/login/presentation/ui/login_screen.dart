@@ -119,28 +119,70 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: 'assets/icons/google-icon-logo-svgrepo-com.svg',
                   ),
                   20.verticalSpace,
+
                   AuthContainer(
                     text: LocaleKeys.facelogin.tr(),
                     onTap: () async {
-                      var user = await signInWithFacebook(context);
+                      final user = await signInWithFacebook(context);
+
+                      if (!mounted) return;
+
                       if (user != null) {
-                        print(
-                          'مرحباً بكِ، تم تسجيل الدخول بواسطة: ${user.email}',
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'فشل تسجيل الدخول بواسطة فيسبوك، حاول مرة أخرى',
-                            ),
-                            backgroundColor: AppColor.containercolor,
-                          ),
-                        );
+                        debugPrint('Facebook login successful: ${user.email}');
+                        return;
                       }
+
+                      // A pending credential means Firebase found an existing account.
+                      if (pendingFacebookCredential != null) {
+                        if (!mounted) return;
+                        final shouldContinue = await showDialog<bool>(
+                          context: context,
+                          builder: (dialogContext) {
+                            return AlertDialog(
+                              title: Text(LocaleKeys.accountAlreadyExists.tr()),
+                              content: Text(
+                                LocaleKeys.accountAlreadyExistsMessage.tr(),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(dialogContext).pop(false);
+                                  },
+                                  child: Text(LocaleKeys.cancel.tr()),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(dialogContext).pop(true);
+                                  },
+                                  child: Text(
+                                    LocaleKeys.continueWithGoogle.tr(),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        if (!mounted) return;
+
+                        if (shouldContinue == true) {
+                          await signInWithGoogle(context);
+                        }
+
+                        return;
+                      }
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(LocaleKeys.facebookLoginFailed.tr()),
+                          backgroundColor: AppColor.containercolor,
+                        ),
+                      );
                     },
                     containcolor: AppColor.secondarycolor,
                     icon: 'assets/icons/facebook-3-logo-svgrepo-com.svg',
                   ),
+
                   30.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
