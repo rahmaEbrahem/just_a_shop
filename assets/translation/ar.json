@@ -54,5 +54,16 @@
 "deadline":"انتهت مهلة الاتصال",
 "formatexception":"خطأ في تنسيق البيانات",
 "exception":"حدث خطأ",
-"invalidcredentials":"اسم المستخدم او كلمة المرور غير صحيحة"
+"invalidcredentials":"اسم المستخدم او كلمة المرور غير صحيحة",
+  "accountAlreadyExists": "الحساب موجود بالفعل",
+  "accountAlreadyExistsMessage": "يوجد حساب مسجل بهذا البريد الإلكتروني. تابعي باستخدام Google لربط حساب Facebook به.",
+  "continueWithGoogle": "المتابعة باستخدام Google",
+  "cancel": "إلغاء",
+  "facebookGoogleLinked": "تم ربط حسابي Google وFacebook بنجاح.",
+  "googleLoginSuccessFacebookLinkFailed": "تم تسجيل الدخول باستخدام Google، لكن تعذّر ربط Facebook. يُرجى المحاولة مرة أخرى.",
+  "facebookAccountAlreadyLinked": "حساب Facebook هذا مرتبط بالفعل بحساب آخر.",
+  "googleAccountMismatch": "حساب Google المختار لا يتطابق مع البريد الإلكتروني المرتبط بحساب Facebook.",
+  "facebookLoginFailed": "فشل تسجيل الدخول باستخدام Facebook. يُرجى المحاولة مرة أخرى.",
+  "facebookLoginCancelled": "تم إلغاء تسجيل الدخول باستخدام Facebook.",
+  "googleLoginFailed": "فشل تسجيل الدخول باستخدام Google. يُرجى المحاولة مرة أخرى."
 }
