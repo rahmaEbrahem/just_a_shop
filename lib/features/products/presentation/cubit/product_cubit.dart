@@ -9,6 +9,7 @@ part 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductInitial());
+
   final int limit = 10;
   int skip = 0;
   bool isLoadingMore = false;
@@ -19,15 +20,23 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductLoading());
 
     try {
-      final products = await ProductRepo.getProducts(limit: limit, skip: skip);
+      final products = await ProductRepo.getProducts(limit: limit, skip: 0);
+
       allProducts = products;
       skip = allProducts.length;
       hasMoreProducts = products.length == limit;
-      emit(ProductSuccess(allProducts));
+
+      emit(ProductSuccess(List.of(allProducts)));
     } catch (e) {
       final failure = ErrorHandler.handle(e);
       emit(ProductError(failure));
     }
+  }
+
+  Future<void> retryGetProducts() async {
+    skip = 0;
+    hasMoreProducts = true;
+    await getProducts();
   }
 
   Future<void> loadMoreProducts() async {

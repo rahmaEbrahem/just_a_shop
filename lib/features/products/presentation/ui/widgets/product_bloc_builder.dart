@@ -23,7 +23,28 @@ class ProductBlocBuilder extends StatelessWidget {
         }
 
         if (state is ProductError) {
-          return Center(child: Text(state.failure.failureMessage));
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    state.failure.failureMessage,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      context.read<ProductCubit>().retryGetProducts();
+                    },
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
+          );
         }
 
         return const SizedBox.shrink();

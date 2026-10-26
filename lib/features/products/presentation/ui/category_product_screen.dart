@@ -15,7 +15,7 @@ class CategoryProductsScreen extends StatelessWidget {
           CategoryProductCubit()..getProductsByCategory(category),
       child: Scaffold(
         appBar: AppBar(title: Text(category), centerTitle: true),
-        body: const CategoryProductBlocBuilder(),
+        body: CategoryProductBlocBuilder(category: category),
       ),
     );
   }

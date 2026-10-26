@@ -20,4 +20,8 @@ class CategoryProductCubit extends Cubit<CategoryProductState> {
       emit(CategoryProductError(failure));
     }
   }
+
+  Future<void> retryGetProducts(String category) async {
+    await getProductsByCategory(category);
+  }
 }
