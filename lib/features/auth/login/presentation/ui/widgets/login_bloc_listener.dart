@@ -15,7 +15,7 @@ class LoginBlocListener extends StatelessWidget {
         if (state is LoginLoading) {
           AppDialog.loadingdialog(context);
         } else if (state is LoginSuccess) {
-          context.pushNamedAndRemoveUntil(Routes.homescreen, false);
+          context.pushNamedAndRemoveUntil(Routes.navscreen, false);
         } else if (state is LoginError) {
           context.pop();
           AppDialog.error(context, message: state.message);

@@ -15,6 +15,7 @@ class LoginRepo {
         data: loginreqmodel.toJson(),
       );
       final data = response.data;
+
       final loginmodel = LoginModel.fromJson(data);
       await UserStorage.saveUser(
         id: loginmodel.id!,

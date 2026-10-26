@@ -6,8 +6,26 @@ class AppTheme {
   static ThemeData lightthem = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColor.lightmode,
-    navigationBarTheme: NavigationBarThemeData(
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColor.lightmode,
+      elevation: 10,
+      type: BottomNavigationBarType.fixed,
+      selectedIconTheme: IconThemeData(color: AppColor.maincolor, size: 30),
+      unselectedIconTheme: IconThemeData(
+        color: AppColor.secondarycolor,
+        size: 26,
+      ),
+      selectedLabelStyle: TextStyle(
+        fontSize: 12.sp,
+        fontWeight: FontWeight(700),
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 12.sp,
+        fontWeight: FontWeight(400),
+      ),
+      showUnselectedLabels: true,
+      showSelectedLabels: true,
     ),
     appBarTheme: AppBarTheme(backgroundColor: AppColor.lightmode),
     inputDecorationTheme: InputDecorationTheme(
@@ -35,10 +53,27 @@ class AppTheme {
   );
   static ThemeData darkthem = ThemeData(
     brightness: Brightness.dark,
-    navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: AppColor.darkmode,
-    ),
     scaffoldBackgroundColor: AppColor.darkmode,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColor.bottomnavcolor,
+      elevation: 10,
+      type: BottomNavigationBarType.fixed,
+      selectedIconTheme: IconThemeData(color: AppColor.maincolor, size: 30),
+      unselectedIconTheme: IconThemeData(
+        color: AppColor.secondarycolor,
+        size: 26,
+      ),
+      selectedLabelStyle: TextStyle(
+        fontSize: 12.sp,
+        fontWeight: FontWeight(700),
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 12.sp,
+        fontWeight: FontWeight(400),
+      ),
+      showUnselectedLabels: true,
+      showSelectedLabels: true,
+    ),
     appBarTheme: AppBarTheme(backgroundColor: AppColor.darkmode),
     inputDecorationTheme: InputDecorationTheme(
       fillColor: AppColor.lightmode,

@@ -27,6 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
   var passwordcontroller = TextEditingController();
   var namecontroller = TextEditingController();
 
+  bool isGoogleLoading = false;
+  bool isFacebookLoading = false;
+
   @override
   void dispose() {
     namecontroller.dispose();
@@ -110,75 +113,143 @@ class _LoginScreenState extends State<LoginScreen> {
                   20.verticalSpace,
                   AuthDivider(),
                   30.verticalSpace,
+
                   AuthContainer(
-                    text: LocaleKeys.googlelogin.tr(),
+                    text: isGoogleLoading
+                        ? 'Signing in...'
+                        : LocaleKeys.googlelogin.tr(),
                     onTap: () async {
-                      await signInWithGoogle(context);
+                      if (isGoogleLoading || isFacebookLoading) return;
+
+                      setState(() {
+                        isGoogleLoading = true;
+                      });
+
+                      try {
+                        await signInWithGoogle(context);
+                      } finally {
+                        if (mounted) {
+                          setState(() {
+                            isGoogleLoading = false;
+                          });
+                        }
+                      }
                     },
+                    isLoading: isGoogleLoading,
+                    enabled: !isFacebookLoading,
                     containcolor: Colors.white,
                     icon: 'assets/icons/google-icon-logo-svgrepo-com.svg',
                   ),
+
                   20.verticalSpace,
 
                   AuthContainer(
-                    text: LocaleKeys.facelogin.tr(),
+                    text: isFacebookLoading
+                        ? 'Signing in...'
+                        : LocaleKeys.facelogin.tr(),
                     onTap: () async {
-                      final user = await signInWithFacebook(context);
+                      if (isGoogleLoading || isFacebookLoading) return;
 
-                      if (!mounted) return;
+                      setState(() {
+                        isFacebookLoading = true;
+                      });
 
-                      if (user != null) {
-                        debugPrint('Facebook login successful: ${user.email}');
-                        return;
-                      }
-
-                      // A pending credential means Firebase found an existing account.
-                      if (pendingFacebookCredential != null) {
-                        if (!mounted) return;
-                        final shouldContinue = await showDialog<bool>(
-                          context: context,
-                          builder: (dialogContext) {
-                            return AlertDialog(
-                              title: Text(LocaleKeys.accountAlreadyExists.tr()),
-                              content: Text(
-                                LocaleKeys.accountAlreadyExistsMessage.tr(),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(dialogContext).pop(false);
-                                  },
-                                  child: Text(LocaleKeys.cancel.tr()),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(dialogContext).pop(true);
-                                  },
-                                  child: Text(
-                                    LocaleKeys.continueWithGoogle.tr(),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                      try {
+                        final user = await signInWithFacebook(context);
 
                         if (!mounted) return;
 
-                        if (shouldContinue == true) {
-                          await signInWithGoogle(context);
+                        if (user != null) {
+                          debugPrint(
+                            'Facebook login successful: ${user.email}',
+                          );
+                          return;
                         }
 
-                        return;
-                      }
+                        if (pendingFacebookCredential != null) {
+                          final shouldContinue = await showDialog<bool>(
+                            context: context,
+                            builder: (dialogContext) {
+                              return AlertDialog(
+                                title: Text(
+                                  LocaleKeys.accountAlreadyExists.tr(),
+                                ),
+                                content: Text(
+                                  LocaleKeys.accountAlreadyExistsMessage.tr(),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(dialogContext).pop(false);
+                                    },
+                                    child: Text(LocaleKeys.cancel.tr()),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(dialogContext).pop(true);
+                                    },
+                                    child: Text(
+                                      LocaleKeys.continueWithGoogle.tr(),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(LocaleKeys.facebookLoginFailed.tr()),
-                          backgroundColor: AppColor.containercolor,
-                        ),
-                      );
+                          if (!mounted) return;
+
+                          if (shouldContinue == true) {
+                            if (isGoogleLoading) return;
+
+                            setState(() {
+                              isFacebookLoading = false;
+                              isGoogleLoading = true;
+                            });
+
+                            try {
+                              await signInWithGoogle(context);
+                            } finally {
+                              if (mounted) {
+                                setState(() {
+                                  isGoogleLoading = false;
+                                });
+                              }
+                            }
+                          }
+
+                          return;
+                        }
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(LocaleKeys.facebookLoginFailed.tr()),
+                            backgroundColor: AppColor.containercolor,
+                          ),
+                        );
+                      } catch (e) {
+                        debugPrint('Facebook login error: $e');
+
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                LocaleKeys.facebookLoginFailed.tr(),
+                              ),
+                              backgroundColor: AppColor.containercolor,
+                            ),
+                          );
+                        }
+                      } finally {
+                        if (mounted) {
+                          setState(() {
+                            isFacebookLoading = false;
+                          });
+                        }
+                      }
                     },
+                    isLoading: isFacebookLoading,
+                    enabled: !isGoogleLoading,
                     containcolor: AppColor.secondarycolor,
                     icon: 'assets/icons/facebook-3-logo-svgrepo-com.svg',
                   ),

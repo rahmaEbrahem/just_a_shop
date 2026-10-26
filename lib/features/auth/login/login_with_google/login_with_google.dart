@@ -99,7 +99,7 @@ Future<UserCredential?> signInWithGoogle(BuildContext context) async {
         );
       }
 
-      context.pushNamed(Routes.homescreen);
+      context.pushNamedAndRemoveUntil(Routes.navscreen, false);
     }
 
     return userCredential;
