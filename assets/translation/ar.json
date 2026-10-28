@@ -1,5 +1,5 @@
-{"chooselanguage":"اختر اللغة",
-"choosetheme":"اختر المظهر",
+{"chooselanguage":" اللغة",
+"choosetheme":" المظهر",
 "continuetext":"متابعة",
 "light":"فاتح",
 "dark":"داكن",
@@ -86,5 +86,13 @@
 "googleAccountMismatch": "حساب Google ده لا يتطابق مع الحساب الموجود.",
 "facebookAccountAlreadyLinked": "حساب Facebook ده مرتبط بالفعل بحساب آخر.",
 "googleLoginSuccessFacebookLinkFailed": "تم تسجيل الدخول باستخدام Google، لكن فشل ربط Facebook.",
-"facebookGoogleLinked": "تم ربط حساب Facebook بنجاح."
+"facebookGoogleLinked": "تم ربط حساب Facebook بنجاح.",
+"choosepreference":"اختار تفضيلاتك",
+"latersettings":"يمكنك تغير هذه الاعدادات لاحقا من خلال الاعدادات",
+"profile":"الملف الشخصي",
+"setting":"الاعدادات",
+"personalinformation":"المعلومات الشخصية",
+"logout":"تسجيل الخروج",
+"addressupdated":"تم تعديل العنوان بنجاح",
+"savechange":"حفظ التغييرات"
 }

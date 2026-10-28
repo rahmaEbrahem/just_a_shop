@@ -31,7 +31,7 @@ class UserStorage {
     return prefs.getString("firstName");
   }
 
-  static Future<String?> getLirstName() async {
+  static Future<String?> getLastName() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString("lastName");
   }

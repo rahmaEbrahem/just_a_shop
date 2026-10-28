@@ -1,15 +1,25 @@
 import 'package:e_commerce_app/core/networking/api_endpoints.dart';
 import 'package:e_commerce_app/core/networking/dio_factory.dart';
+import 'package:e_commerce_app/features/home/presentation/ui/widgets/product_sort_order.dart';
 import 'package:e_commerce_app/features/products/data/model/product_model.dart';
 
 class ProductRepo {
   static Future<List<ProductModel>> getProducts({
     required int limit,
     required int skip,
+    ProductSortOrder? sortOrder,
   }) async {
+    final queryParameters = <String, dynamic>{'limit': limit, 'skip': skip};
+    if (sortOrder != null) {
+      queryParameters['sortBy'] = 'price';
+      queryParameters['order'] = sortOrder == ProductSortOrder.priceLowToHigh
+          ? 'asc'
+          : 'desc';
+    }
+
     final response = await DioFactory.dio.get(
       ApiEndpoints.allproductendpoints,
-      queryParameters: {'limit': limit, 'skip': skip},
+      queryParameters: queryParameters,
     );
     final List<dynamic> data = response.data["products"];
     return data.map((product) => ProductModel.fromJson(product)).toList();

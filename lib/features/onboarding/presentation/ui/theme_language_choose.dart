@@ -30,8 +30,9 @@ class _ThemeLanguageChooseState extends State<ThemeLanguageChoose> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                80.verticalSpace,
+                50.verticalSpace,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -42,13 +43,26 @@ class _ThemeLanguageChooseState extends State<ThemeLanguageChoose> {
                     ),
                     10.horizontalSpace,
                     Icon(
-                      Icons.shopping_cart,
+                      Icons.shopping_cart_rounded,
                       size: 40,
-                      color: AppColor.containercolor,
+                      color: AppColor.maincolor,
                     ),
                   ],
                 ),
-                120.verticalSpace,
+                50.verticalSpace,
+                Text(
+                  LocaleKeys.choosepreference.tr(),
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                10.verticalSpace,
+                Text(
+                  textAlign: TextAlign.center,
+                  LocaleKeys.latersettings.tr(),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: AppColor.bordercolor,
+                  ),
+                ),
+                50.verticalSpace,
                 Text(
                   LocaleKeys.chooselanguage.tr(),
                   style: Theme.of(context).textTheme.titleLarge,
@@ -63,14 +77,16 @@ class _ThemeLanguageChooseState extends State<ThemeLanguageChoose> {
                       onTap: () {
                         context.setLocale(const Locale('en'));
                       },
+                      icon: Icons.language,
                     ),
-                    15.horizontalSpace,
+                    25.horizontalSpace,
                     CustomContainer(
                       text: 'العربية',
                       isSelected: context.locale.languageCode == "ar",
                       onTap: () {
                         context.setLocale(const Locale('ar'));
                       },
+                      icon: Icons.language,
                     ),
                   ],
                 ),
@@ -91,8 +107,9 @@ class _ThemeLanguageChooseState extends State<ThemeLanguageChoose> {
                       onTap: () {
                         context.read<ThemeCubit>().setTheme('light');
                       },
+                      icon: Icons.light_mode,
                     ),
-                    15.horizontalSpace,
+                    25.horizontalSpace,
                     CustomContainer(
                       text: LocaleKeys.dark.tr(),
                       isSelected:
@@ -101,10 +118,11 @@ class _ThemeLanguageChooseState extends State<ThemeLanguageChoose> {
                       onTap: () {
                         context.read<ThemeCubit>().setTheme('dark');
                       },
+                      icon: Icons.dark_mode,
                     ),
                   ],
                 ),
-                180.verticalSpace,
+                100.verticalSpace,
                 AppContainer(
                   text: LocaleKeys.continuetext.tr(),
                   onTap: () async {
