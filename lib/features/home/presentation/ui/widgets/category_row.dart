@@ -6,7 +6,6 @@ import 'package:e_commerce_app/features/products/presentation/ui/category_produc
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,7 +18,7 @@ class CategoryRow extends StatelessWidget {
     return BlocBuilder<CategoryCubit, CategoryState>(
       builder: (context, state) {
         if (state is CategoryLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (state is CategorySuccess) {
           final categories = state.categories.take(5).toList();
@@ -33,15 +32,16 @@ class CategoryRow extends StatelessWidget {
                     LocaleKeys.categories.tr(),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
-
-                  InkWell(
-                    onTap: () {
-                      AppBottomNavBar.navigateToCategories(context);
-                    },
-                    child: Text(
-                      LocaleKeys.seeall.tr(),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColor.maincolor,
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        AppBottomNavBar.navigateToCategories(context);
+                      },
+                      child: Text(
+                        LocaleKeys.seeall.tr(),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(color: AppColor.secondarycolor),
                       ),
                     ),
                   ),
@@ -110,7 +110,7 @@ class CategoryRow extends StatelessWidget {
         if (state is CategoryError) {
           return Text(state.failure.failureMessage);
         }
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       },
     );
   }

@@ -11,6 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBottomNavBar extends StatefulWidget {
+  static void navigateToHome(BuildContext context) {
+    final state = context.findAncestorStateOfType<_AppBottomNavBarState>();
+    state?.changeTab(0);
+  }
+
   static void navigateToCategories(BuildContext context) {
     final state = context.findAncestorStateOfType<_AppBottomNavBarState>();
     state?.changeTab(1);

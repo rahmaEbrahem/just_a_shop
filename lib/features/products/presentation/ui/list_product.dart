@@ -1,7 +1,6 @@
 import 'package:e_commerce_app/features/products/data/model/product_model.dart';
 import 'package:e_commerce_app/features/products/presentation/ui/product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ListProducts extends StatelessWidget {
   final List<ProductModel> products;

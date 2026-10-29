@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const chooselanguage = 'chooselanguage';
   static const choosetheme = 'choosetheme';
   static const continuetext = 'continuetext';
@@ -90,7 +90,8 @@ abstract class  LocaleKeys {
   static const continueWithGoogle = 'continueWithGoogle';
   static const googleAccountMismatch = 'googleAccountMismatch';
   static const facebookAccountAlreadyLinked = 'facebookAccountAlreadyLinked';
-  static const googleLoginSuccessFacebookLinkFailed = 'googleLoginSuccessFacebookLinkFailed';
+  static const googleLoginSuccessFacebookLinkFailed =
+      'googleLoginSuccessFacebookLinkFailed';
   static const facebookGoogleLinked = 'facebookGoogleLinked';
   static const choosepreference = 'choosepreference';
   static const latersettings = 'latersettings';
@@ -100,5 +101,4 @@ abstract class  LocaleKeys {
   static const logout = 'logout';
   static const addressupdated = 'addressupdated';
   static const savechange = 'savechange';
-
 }
