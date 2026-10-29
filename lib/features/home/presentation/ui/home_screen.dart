@@ -68,7 +68,11 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     const Expanded(child: HomeSearchBar()),
                     10.horizontalSpace,
-                    SortingContainer(onSortingSelected: (sortOrder) {}),
+                    SortingContainer(
+                      onSortingSelected: (sortOrder) {
+                        context.read<ProductCubit>().changeSortOrder(sortOrder);
+                      },
+                    ),
                   ],
                 ),
                 20.verticalSpace,

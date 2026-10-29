@@ -69,7 +69,7 @@ class _OnboardingState extends State<Onboarding> {
                   },
                   children: [
                     OnboardingItem(
-                      image: 'assets/images/onbording.png',
+                      image: 'assets/images/onbord.png',
                       title: LocaleKeys.discovertitle.tr(),
                       decription: LocaleKeys.discoverdesc.tr(),
                     ),
@@ -79,7 +79,7 @@ class _OnboardingState extends State<Onboarding> {
                       decription: LocaleKeys.choosedesc.tr(),
                     ),
                     OnboardingItem(
-                      image: 'assets/images/onbordig2.png',
+                      image: 'assets/images/onbord2.png',
                       title: LocaleKeys.completetilte.tr(),
                       decription: LocaleKeys.completedesc.tr(),
                     ),
@@ -100,7 +100,7 @@ class _OnboardingState extends State<Onboarding> {
               AppContainer(
                 text: LocaleKeys.getbutton.tr(),
                 onTap: () {
-                  context.pushReplacemetNamed(Routes.registerscreen);
+                  context.pushReplacemetNamed(Routes.loginscreen);
                 },
               ),
             ],

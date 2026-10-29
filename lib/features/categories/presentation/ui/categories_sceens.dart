@@ -24,7 +24,7 @@ class CategoriesSceens extends StatelessWidget {
                     Text(
                       LocaleKeys.categories,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: AppColor.secondarycolor,
+                        color: AppColor.maincolor,
                       ),
                     ),
                   ],

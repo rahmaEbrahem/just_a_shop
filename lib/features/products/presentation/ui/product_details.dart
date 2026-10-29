@@ -19,7 +19,7 @@ class ProductDetails extends StatelessWidget {
           LocaleKeys.productdetails.tr(),
           style: Theme.of(
             context,
-          ).textTheme.titleLarge?.copyWith(color: AppColor.secondarycolor),
+          ).textTheme.titleLarge?.copyWith(color: AppColor.maincolor),
         ),
       ),
       body: SingleChildScrollView(

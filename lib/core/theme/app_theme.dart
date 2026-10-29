@@ -55,7 +55,7 @@ class AppTheme {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColor.darkmode,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColor.bottomnavcolor,
+      backgroundColor: AppColor.darkmode,
       elevation: 10,
       type: BottomNavigationBarType.fixed,
       selectedIconTheme: IconThemeData(color: AppColor.maincolor, size: 30),

@@ -93,4 +93,12 @@ abstract class LocaleKeys {
   static const googleLoginSuccessFacebookLinkFailed =
       'googleLoginSuccessFacebookLinkFailed';
   static const facebookGoogleLinked = 'facebookGoogleLinked';
+  static const choosepreference = 'choosepreference';
+  static const latersettings = 'latersettings';
+  static const profile = 'profile';
+  static const setting = 'setting';
+  static const personalinformation = 'personalinformation';
+  static const logout = 'logout';
+  static const addressupdated = 'addressupdated';
+  static const savechange = 'savechange';
 }

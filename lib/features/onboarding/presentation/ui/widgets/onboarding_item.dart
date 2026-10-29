@@ -42,7 +42,7 @@ class OnboardingItem extends StatelessWidget {
           decription,
           style: Theme.of(
             context,
-          ).textTheme.titleSmall?.copyWith(color: AppColor.containercolor),
+          ).textTheme.titleSmall?.copyWith(color: AppColor.bordercolor),
           textAlign: TextAlign.center,
         ),
       ],

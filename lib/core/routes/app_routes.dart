@@ -13,6 +13,7 @@ import 'package:e_commerce_app/features/onboarding/presentation/ui/onboarding.da
 import 'package:e_commerce_app/features/onboarding/presentation/ui/theme_language_choose.dart';
 import 'package:e_commerce_app/features/products/data/model/product_model.dart';
 import 'package:e_commerce_app/features/products/presentation/ui/product_details.dart';
+import 'package:e_commerce_app/features/profile/presentation/ui/profile_info_screen.dart';
 import 'package:e_commerce_app/features/profile/presentation/ui/profile_screen.dart';
 import 'package:e_commerce_app/features/search/presentation/ui/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,8 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: ((context) => ProductDetails(product: product)),
         );
+      case Routes.profileinfoscreen:
+        return MaterialPageRoute(builder: ((context) => ProfileInfoScreen()));
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(
