@@ -62,7 +62,6 @@ class HeaderSearchScreen extends StatelessWidget {
               fillColor: Colors.white,
               prefixIcon: Icon(Icons.search),
               hintText: "search",
-              suffixIcon: Icon(Icons.mic_none),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(color: Colors.grey, width: 1),
