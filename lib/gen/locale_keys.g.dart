@@ -101,11 +101,4 @@ abstract class LocaleKeys {
   static const logout = 'logout';
   static const addressupdated = 'addressupdated';
   static const savechange = 'savechange';
-  static const cartTitle = 'cartTitle';
-  static const cartEmpty = 'cartEmpty';
-  static const cartTotal = 'cartTotal';
-  static const currency = 'currency';
-  static const checkout = 'checkout';
-  static const orderSuccess = 'orderSuccess';
-  static const unnamedProduct = 'unnamedProduct';
 }
