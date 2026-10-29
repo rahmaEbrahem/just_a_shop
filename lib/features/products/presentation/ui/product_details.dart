@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/core/theme/app_colors.dart';
-import 'package:e_commerce_app/features/products/data/model/product_model.dart';
 import 'package:e_commerce_app/features/products/presentation/ui/widgets/add_cart.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDetails extends StatelessWidget {
-  final ProductModel product;
+  final dynamic product;
 
   const ProductDetails({super.key, required this.product});
 
