@@ -10,4 +10,5 @@ class Routes {
   static const String profilescreen = "profilescreen";
   static const String navscreen = "navscreen";
   static const String productdetailsscreen = 'productdetailsscreen';
+  static const String profileinfoscreen = 'profileinfoscreen';
 }

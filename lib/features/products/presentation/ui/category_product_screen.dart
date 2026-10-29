@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/products/presentation/cubit/category_product_cubit.dart';
 import 'package:e_commerce_app/features/products/presentation/ui/widgets/category_product_bloc_builder.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,10 @@ class CategoryProductsScreen extends StatelessWidget {
       create: (context) =>
           CategoryProductCubit()..getProductsByCategory(category),
       child: Scaffold(
-        appBar: AppBar(title: Text(category), centerTitle: true),
+        appBar: AppBar(
+          title: Text(category, style: TextStyle(color: AppColor.maincolor)),
+          centerTitle: true,
+        ),
         body: CategoryProductBlocBuilder(category: category),
       ),
     );

@@ -61,7 +61,7 @@ class SortingContainer extends StatelessWidget {
         width: 50.w,
         decoration: BoxDecoration(
           color: AppColor.searchcolor,
-          border: Border.all(color: AppColor.bordercolor),
+          border: Border.all(color: AppColor.bluegreycolor),
           borderRadius: BorderRadius.circular(15.r),
         ),
         child: Icon(Icons.sort, color: AppColor.darkmode),

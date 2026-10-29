@@ -24,7 +24,7 @@ class HomeHeader extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.home, size: 45, color: AppColor.maincolor),
+                Icon(Icons.home, size: 45, color: AppColor.containercolor),
                 10.horizontalSpace,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,8 +32,8 @@ class HomeHeader extends StatelessWidget {
                     5.verticalSpace,
                     Text(
                       LocaleKeys.welcome.tr(args: [firstName]),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColor.secondarycolor,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: AppColor.maincolor,
                       ),
                     ),
                     3.verticalSpace,

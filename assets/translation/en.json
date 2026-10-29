@@ -1,5 +1,5 @@
-{"chooselanguage":"Choose the language",
-"choosetheme":"Choose the theme",
+{"chooselanguage":" Language",
+"choosetheme":"Theme",
 "continuetext":"Continue",
 "light":"Light",
 "dark":"Dark",
@@ -86,5 +86,13 @@
 "googleAccountMismatch": "This Google account does not match the existing account.",
 "facebookAccountAlreadyLinked": "This Facebook account is already linked to another account.",
 "googleLoginSuccessFacebookLinkFailed": "Google sign-in succeeded, but linking Facebook failed.",
-"facebookGoogleLinked": "Facebook account linked successfully."
+"facebookGoogleLinked": "Facebook account linked successfully.",
+"choosepreference":"Choose Your Preferences",
+"latersettings":"You can change this later from settings",
+"profile":"My profile",
+"setting":"Settings",
+"personalinformation":"Personal Information",
+"logout":"Logout",
+"addressupdated":"Adress updated successfully",
+"savechange":"Save Changes"
 }

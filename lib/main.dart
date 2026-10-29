@@ -14,8 +14,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SettingsModelAdapter());
   await Hive.openBox<SettingsModel>('settingsBox');
-  await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
