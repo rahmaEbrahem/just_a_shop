@@ -35,7 +35,7 @@ class ProductModel {
 
     weight = json['weight'];
     dimensions = json['dimensions'] != null
-        ? new Dimensions.fromJson(json['dimensions'])
+        ? Dimensions.fromJson(json['dimensions'])
         : null;
 
     returnPolicy = json['returnPolicy'];

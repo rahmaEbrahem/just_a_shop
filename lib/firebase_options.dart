@@ -62,7 +62,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '135754886282',
     projectId: 'e-commerce-51bce',
     storageBucket: 'e-commerce-51bce.firebasestorage.app',
-    iosClientId: '135754886282-rmos7b73mddok50m4ld11rra49qu1dib.apps.googleusercontent.com',
+    iosClientId:
+        '135754886282-rmos7b73mddok50m4ld11rra49qu1dib.apps.googleusercontent.com',
     iosBundleId: 'com.example.eCommerceApp',
   );
   static const FirebaseOptions macos = FirebaseOptions(
@@ -71,7 +72,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '135754886282',
     projectId: 'e-commerce-51bce',
     storageBucket: 'e-commerce-51bce.firebasestorage.app',
-    iosClientId: '135754886282-rmos7b73mddok50m4ld11rra49qu1dib.apps.googleusercontent.com',
+    iosClientId:
+        '135754886282-rmos7b73mddok50m4ld11rra49qu1dib.apps.googleusercontent.com',
     iosBundleId: 'com.example.eCommerceApp',
   );
 
