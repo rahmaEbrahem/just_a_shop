@@ -94,5 +94,13 @@
 "personalinformation":"Personal Information",
 "logout":"Logout",
 "addressupdated":"Adress updated successfully",
-"savechange":"Save Changes"
+"savechange":"Save Changes",
+"cartTitle": "Shopping Cart",
+"cartEmpty": "Your cart is empty",
+"cartTotal": "Total:",
+"currency": "EGP",
+"checkout": "Checkout",
+"orderSuccess": "Order placed successfully!",
+"unnamedProduct": "Unnamed product"
+
 }

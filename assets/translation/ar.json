@@ -94,5 +94,12 @@
 "personalinformation":"المعلومات الشخصية",
 "logout":"تسجيل الخروج",
 "addressupdated":"تم تعديل العنوان بنجاح",
-"savechange":"حفظ التغييرات"
+"savechange":"حفظ التغييرات",
+"cartTitle": "سلة التسوق",
+"cartEmpty": "سلة التسوق فارغة حالياً",
+"cartTotal": "المجموع الكلي:",
+"currency": "جنيه",
+"checkout": "إتمام الطلب",
+"orderSuccess": "تم إتمام الطلب بنجاح!",
+"unnamedProduct": "منتج بدون اسم"
 }

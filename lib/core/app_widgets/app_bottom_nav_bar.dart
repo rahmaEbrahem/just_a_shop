@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/routes/routes.dart';
 import 'package:e_commerce_app/features/cart/presentation/ui/cart_screen.dart';
 import 'package:e_commerce_app/features/categories/presentation/cubit/category_cubit.dart';
 import 'package:e_commerce_app/features/categories/presentation/ui/categories_sceens.dart';
@@ -11,19 +12,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBottomNavBar extends StatefulWidget {
-  static void navigateToHome(BuildContext context) {
-    final state = context.findAncestorStateOfType<_AppBottomNavBarState>();
-    state?.changeTab(0);
-  }
-
   static void navigateToCategories(BuildContext context) {
-    final state = context.findAncestorStateOfType<_AppBottomNavBarState>();
-    state?.changeTab(1);
+    _goToTab(context, 1);
   }
 
   static void navigateToSearch(BuildContext context) {
-    final state = context.findAncestorStateOfType<_AppBottomNavBarState>();
-    state?.changeTab(2);
+    _goToTab(context, 2);
+  }
+
+  static void navigateToCart(BuildContext context) {
+    _goToTab(context, 3);
+  }
+
+  static void _goToTab(BuildContext context, int index) {
+  
+    Navigator.of(context).popUntil(
+      (route) => route.settings.name == Routes.navscreen || route.isFirst,
+    );
+    _AppBottomNavBarState._current?.changeTab(index);
   }
 
   const AppBottomNavBar({super.key});
@@ -33,20 +39,36 @@ class AppBottomNavBar extends StatefulWidget {
 }
 
 class _AppBottomNavBarState extends State<AppBottomNavBar> {
+  static _AppBottomNavBarState? _current;
+
+  int activeindex = 0;
+
+  final List<Widget> screens = [
+    HomeScreen(),
+    CategoriesSceens(),
+    SearchScreen(),
+    const CartScreen(),
+    const ProfileScreen(),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _current = this;
+  }
+
+  @override
+  void dispose() {
+    if (_current == this) _current = null;
+    super.dispose();
+  }
+
   void changeTab(int index) {
     setState(() {
       activeindex = index;
     });
   }
 
-  int activeindex = 0;
-  late final List<Widget> screens = [
-    HomeScreen(),
-    CategoriesSceens(),
-    SearchScreen(),
-    CartScreen(),
-    ProfileScreen(),
-  ];
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -54,38 +76,35 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
         BlocProvider(create: (context) => CategoryCubit()..getcategories()),
         BlocProvider(create: (context) => ProductCubit()..getProducts()),
       ],
-
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: activeindex,
-          onTap: (index) {
-            changeTab(index);
-          },
+          type: BottomNavigationBarType.fixed,
+          onTap: changeTab,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
+              icon: const Icon(Icons.home_outlined),
+              activeIcon: const Icon(Icons.home),
               label: LocaleKeys.home.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.grid_view_outlined),
-              activeIcon: Icon(Icons.grid_view_rounded),
+              icon: const Icon(Icons.grid_view_outlined),
+              activeIcon: const Icon(Icons.grid_view_rounded),
               label: LocaleKeys.categories.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search_outlined),
-              activeIcon: Icon(Icons.search),
+              icon: const Icon(Icons.search_outlined),
+              activeIcon: const Icon(Icons.search),
               label: LocaleKeys.search.tr(),
             ),
-
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined),
-              activeIcon: Icon(Icons.shopping_cart),
+              icon: const Icon(Icons.shopping_cart_outlined),
+              activeIcon: const Icon(Icons.shopping_cart),
               label: LocaleKeys.cart.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person),
+              icon: const Icon(Icons.person_outline),
+              activeIcon: const Icon(Icons.person),
               label: LocaleKeys.account.tr(),
             ),
           ],
