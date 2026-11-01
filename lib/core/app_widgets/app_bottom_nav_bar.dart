@@ -12,6 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBottomNavBar extends StatefulWidget {
+  static void navigateToHome(BuildContext context) {
+    _goToTab(context, 0);
+  }
+
   static void navigateToCategories(BuildContext context) {
     _goToTab(context, 1);
   }
@@ -25,7 +29,6 @@ class AppBottomNavBar extends StatefulWidget {
   }
 
   static void _goToTab(BuildContext context, int index) {
-  
     Navigator.of(context).popUntil(
       (route) => route.settings.name == Routes.navscreen || route.isFirst,
     );

@@ -1,7 +1,6 @@
-import 'package:e_commerce_app/features/cart/presentation/data/model/cart_model.dart';
+import 'package:e_commerce_app/features/cart/data/model/cart_model.dart';
 
 abstract class CartState {}
-
 
 class CartInitial extends CartState {}
 

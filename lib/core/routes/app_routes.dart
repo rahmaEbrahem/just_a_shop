@@ -17,6 +17,7 @@ import 'package:e_commerce_app/features/onboarding/presentation/ui/theme_languag
 import 'package:e_commerce_app/features/products/data/model/product_model.dart';
 import 'package:e_commerce_app/features/profile/presentation/ui/profile_screen.dart';
 import 'package:e_commerce_app/features/search/presentation/ui/search_screen.dart';
+import 'package:e_commerce_app/features/profile/presentation/ui/profile_info_screen.dart';
 
 class AppRoutes {
   static Route? onGenerateRoute(RouteSettings settings) {
@@ -27,9 +28,7 @@ class AppRoutes {
         );
 
       case Routes.onboarding:
-        return MaterialPageRoute(
-          builder: (context) => const Onboarding(),
-        );
+        return MaterialPageRoute(builder: (context) => const Onboarding());
 
       case Routes.registerscreen:
         return MaterialPageRoute(
@@ -64,23 +63,19 @@ class AppRoutes {
         );
 
       case Routes.searchscreen:
-        return MaterialPageRoute(
-          builder: (context) => const SearchScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const SearchScreen());
 
       case Routes.cartscreen:
-        return MaterialPageRoute(
-          builder: (context) => const CartScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const CartScreen());
 
       case Routes.profilescreen:
-        return MaterialPageRoute(
-          builder: (context) => const ProfileScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
       case Routes.navscreen:
+        return MaterialPageRoute(builder: (context) => const AppBottomNavBar());
+      case Routes.profileinfoscreen:
         return MaterialPageRoute(
-          builder: (context) => const AppBottomNavBar(),
+          builder: (context) => const ProfileInfoScreen(),
         );
 
       case Routes.productdetailsscreen:
@@ -99,11 +94,8 @@ class AppRoutes {
 
   static Route _undefinedRoute() {
     return MaterialPageRoute(
-      builder: (context) => const Scaffold(
-        body: Center(
-          child: Text("404 - Page Not Found"),
-        ),
-      ),
+      builder: (context) =>
+          const Scaffold(body: Center(child: Text("404 - Page Not Found"))),
     );
   }
 }

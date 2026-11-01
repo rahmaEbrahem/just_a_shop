@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/features/cart/presentation/data/model/cart_model.dart';
+import 'package:e_commerce_app/features/cart/data/model/cart_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cart_state.dart';
 
@@ -10,12 +10,10 @@ class CartCubit extends Cubit<CartState> {
   List<CartModel> get items => List.unmodifiable(_items);
 
   void getCartItems() {
-      print('getCartItems on cubit: ${identityHashCode(this)}');
     _emitCartUpdated();
   }
 
   void addItem(CartModel product) {
-     print('addItem on cubit: ${identityHashCode(this)}');
     final index = _items.indexWhere((element) => element.id == product.id);
     if (index != -1) {
       _items[index].quantity =
@@ -51,8 +49,8 @@ class CartCubit extends Cubit<CartState> {
     await Future.delayed(const Duration(milliseconds: 800));
 
     _items.clear();
-    emit(CartSuccess());      
-    _emitCartUpdated();      
+    emit(CartSuccess());
+    _emitCartUpdated();
   }
 
   double calculateTotal() {
