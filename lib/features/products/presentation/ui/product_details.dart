@@ -4,9 +4,10 @@ import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_app/features/products/data/model/product_model.dart';
 
 class ProductDetails extends StatelessWidget {
-  final dynamic product;
+  final ProductModel product;
 
   const ProductDetails({super.key, required this.product});
 
@@ -113,7 +114,7 @@ class ProductDetails extends StatelessWidget {
                     '${product.returnPolicy ?? 'N/A'}',
                   ),
                   30.verticalSpace,
-                  AddCart(),
+                  AddCart(product: product),
                   50.verticalSpace,
                 ],
               ),

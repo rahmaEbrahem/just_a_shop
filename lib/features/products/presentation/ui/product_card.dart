@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/core/routes/routes.dart';
-import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/products/data/model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +19,6 @@ class ProductCard extends StatelessWidget {
         );
       },
       child: Card(
-        color: AppColor.searchcolor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,17 +47,13 @@ class ProductCard extends StatelessWidget {
                     product.title ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: AppColor.darkmode),
                   ),
 
                   6.verticalSpace,
 
                   Text(
                     '\$${product.price?.toStringAsFixed(2) ?? '0.00'}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColor.darkmode,
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   6.verticalSpace,
 

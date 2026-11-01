@@ -5,8 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HeaderSearchScreen extends StatelessWidget {
-  const HeaderSearchScreen({super.key});
+class HeaderSearchScreen extends StatefulWidget {
+  final TextEditingController controller;
+  const HeaderSearchScreen({super.key, required this.controller});
+
+  @override
+  State<HeaderSearchScreen> createState() => _HeaderSearchScreenState();
+}
+
+class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,17 +46,24 @@ class HeaderSearchScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16),
           child: TextFormField(
+            controller: widget.controller,
+            onChanged: (value) {
+              if (value.trim().isEmpty) {
+                context.read<ProductCubit>().searchProducts('');
+              }
+            },
             onFieldSubmitted: (value) async {
-              if (value.trim().isNotEmpty) {
-                context.read<ProductCubit>().searchProducts(value);
+              final query = value.trim();
+
+              if (query.isNotEmpty) {
+                context.read<ProductCubit>().searchProducts(query);
+
                 final prefs = await SharedPreferences.getInstance();
                 List<String> searches =
                     prefs.getStringList('recent_searches_key') ?? [];
 
-                if (searches.contains(value)) {
-                  searches.remove(value);
-                }
-                searches.insert(0, value);
+                searches.remove(query);
+                searches.insert(0, query);
 
                 await prefs.setStringList('recent_searches_key', searches);
               }

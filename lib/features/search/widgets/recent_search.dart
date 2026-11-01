@@ -1,8 +1,11 @@
+import 'package:e_commerce_app/features/search/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RecentSearch extends StatefulWidget {
-  const RecentSearch({super.key});
+  final TextEditingController controller;
+  const RecentSearch({super.key, required this.controller});
 
   @override
   State<RecentSearch> createState() => _RecentSearchState();
@@ -88,11 +91,27 @@ class _RecentSearchState extends State<RecentSearch> {
                       children: [
                         const Icon(Icons.history, color: Colors.grey, size: 20),
                         const SizedBox(width: 12),
-                        Text(
-                          recentSearches[index],
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black87,
+                        InkWell(
+                          onTap: () {
+                            final query = recentSearches[index];
+
+                            widget.controller.text = query;
+
+                            setState(() {
+                              recentSearches.removeAt(index);
+                              recentSearches.insert(0, query);
+                            });
+
+                            _saveRecentSearches();
+
+                            context.read<ProductCubit>().searchProducts(query);
+                          },
+                          child: Text(
+                            recentSearches[index],
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
                           ),
                         ),
                       ],
