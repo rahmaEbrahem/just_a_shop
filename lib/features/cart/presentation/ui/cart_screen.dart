@@ -1,9 +1,10 @@
 import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/cart/presentation/cubit/cart_state.dart';
-import 'package:e_commerce_app/features/cart/presentation/ui/widgets/cart_products_list.dart'; // استيراد ملف القائمة بالاسم الجديد
+import 'package:e_commerce_app/features/cart/presentation/ui/widgets/cart_products_list.dart';
 import 'package:e_commerce_app/features/cart/presentation/ui/widgets/checkout_section.dart'; 
 import 'package:e_commerce_app/features/cart/presentation/ui/widgets/empty_cart_widget.dart';
+import 'package:e_commerce_app/features/paymob_service/paymob_webview.dart';
 import 'package:e_commerce_app/features/paymob_service/presentation/ui/payment_screen.dart'; 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
@@ -11,11 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
-
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
@@ -23,12 +22,15 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
 
   Future<void> initiatePaymobPayment({
+    required BuildContext context,
     required double amount,
     required String firstName,
     required String lastName,
     required String email,
     required String phone,
   }) async {
+    final cartCubit = context.read<CartCubit>();
+
     final url = Uri.parse('https://paymob-mock-backend.vercel.app/api/create-payment');
 
     try {
@@ -51,9 +53,18 @@ class _CartScreenState extends State<CartScreen> {
         String paymentKey = data['payment_key'];
         String paymentUrl = "https://accept.paymob.com/api/acceptance/iframes/1093635?payment_token=$paymentKey";
         
-        final Uri uri = Uri.parse(paymentUrl);
-        if (await canLaunchUrl(uri)) {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
+        if (context.mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (webViewContext) => PaymobWebview(
+                paymentUrl: paymentUrl,
+                onPaymentFinished: () {
+                  cartCubit.emptyCart(); 
+                },
+              ),
+            ),
+          );
         }
       } else {
         print("Error: ${data['message']}");
@@ -79,6 +90,7 @@ class _CartScreenState extends State<CartScreen> {
             required phone,
           }) {
             initiatePaymobPayment(
+              context: context, 
               amount: amount,
               firstName: firstName,
               lastName: lastName,
