@@ -2,7 +2,6 @@ import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/categories/presentation/ui/category_icons.dart';
 import 'package:e_commerce_app/features/products/presentation/ui/category_product_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 

@@ -101,6 +101,20 @@
 "currency": "EGP",
 "checkout": "Checkout",
 "orderSuccess": "Order placed successfully!",
-"unnamedProduct": "Unnamed product"
+"unnamedProduct": "Unnamed product",
+"Enter shipping and contact details":"Enter shipping and contact details",
+"Total required":"Total required",
+"First Name":"First Name",
+"Please enter your first name":"Please enter your first name",
+"Last Name":"Last Name",
+"Please enter your last name":"Please enter your last name",
+"Email":"Email",
+"Please enter your email":"Please enter your email",
+"Phone Number":"Phone Number",
+"Please enter your phone number":"Please enter your phone number",
+"Proceed to payment":"Proceed to payment",
+"Address":"Address",
+"Please enter your address":"Please enter your address"
+
 
 }
