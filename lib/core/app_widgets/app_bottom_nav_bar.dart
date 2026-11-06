@@ -74,6 +74,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final currentLocale = context.locale;
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => CategoryCubit()..getcategories()),
@@ -81,6 +82,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
       ],
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          key: ValueKey(currentLocale.languageCode),
           currentIndex: activeindex,
           type: BottomNavigationBarType.fixed,
           onTap: changeTab,
