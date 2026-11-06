@@ -101,5 +101,18 @@
 "currency": "جنيه",
 "checkout": "إتمام الطلب",
 "orderSuccess": "تم إتمام الطلب بنجاح!",
-"unnamedProduct": "منتج بدون اسم"
+"unnamedProduct": "منتج بدون اسم",
+"Enter shipping and contact details":"أدخل تفاصيل الشحن وبيانات الاتصال",
+"Total required":"الإجمالي المطلوب",
+"First Name":"الاسم الأول",
+"Please enter your first name":"يرجى إدخال اسمك الأول",
+"Last Name":"اسم العائلة",
+"Please enter your last name":"يرجى إدخال اسم العائلة",
+"Email":"بريد إلكتروني",
+"Please enter your email":"يرجى إدخال بريدك الإلكتروني",
+"Phone Number":"رقم الهاتف",
+"Please enter your phone number":"يرجى إدخال رقم هاتفك",
+"Proceed to payment":"انتقل إلى الدفع",
+"Address":"عنوان",
+"Please enter your address":"يرجي ادخال العنوان"
 }
