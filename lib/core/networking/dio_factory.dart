@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/core/networking/api_constant.dart';
+import 'package:e_commerce_app/core/networking/auth_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -13,6 +14,7 @@ class DioFactory {
         receiveTimeout: Duration(seconds: 30),
       ),
     );
+    dio.interceptors.add(AuthInterceptor());
     initlogger();
   }
 

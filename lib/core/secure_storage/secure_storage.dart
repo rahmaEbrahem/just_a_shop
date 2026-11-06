@@ -20,6 +20,7 @@ class SecureStorage {
   }
 
   static Future<void> deleteTokens() async {
-    await storage.deleteAll();
+    await storage.delete(key: "accessToken");
+    await storage.delete(key: "refreshToken");
   }
 }

@@ -15,7 +15,7 @@ class RegisterBlocListen extends StatelessWidget {
         if (state is RegisterLoading) {
           AppDialog.loadingdialog(context);
         } else if (state is RegisterSuccess) {
-          context.pushNamedAndRemoveUntil(Routes.loginscreen, false);
+          context.pushNamedAndRemoveUntil(Routes.loginscreen, (route) => false);
         } else if (state is RegisterError) {
           context.pop();
           AppDialog.error(context, message: state.message);

@@ -8,22 +8,40 @@ class ErrorHandler {
     if (exception is DioException) {
       final statusCode = exception.response?.statusCode;
       if (statusCode == 400) {
-        return Failure(failureMessage: LocaleKeys.invalidcredentials.tr());
+        return Failure(
+          failureMessage: LocaleKeys.invalidcredentials.tr(),
+          statusCode: statusCode,
+        );
       }
       if (statusCode == 401) {
-        return Failure(failureMessage: LocaleKeys.unauth.tr());
+        return Failure(
+          failureMessage: LocaleKeys.unauth.tr(),
+          statusCode: statusCode,
+        );
       }
       if (statusCode == 403) {
-        return Failure(failureMessage: LocaleKeys.forbidden.tr());
+        return Failure(
+          failureMessage: LocaleKeys.forbidden.tr(),
+          statusCode: statusCode,
+        );
       }
       if (statusCode == 404) {
-        return Failure(failureMessage: LocaleKeys.notfound.tr());
+        return Failure(
+          failureMessage: LocaleKeys.notfound.tr(),
+          statusCode: statusCode,
+        );
       }
       if (statusCode == 422) {
-        return Failure(failureMessage: LocaleKeys.unprocessable.tr());
+        return Failure(
+          failureMessage: LocaleKeys.unprocessable.tr(),
+          statusCode: statusCode,
+        );
       }
       if (statusCode != null && statusCode >= 500) {
-        return Failure(failureMessage: LocaleKeys.servererror.tr());
+        return Failure(
+          failureMessage: LocaleKeys.servererror.tr(),
+          statusCode: statusCode,
+        );
       }
       final errorMassege = exception.message ?? '';
       if (errorMassege.contains('SocketException') ||
@@ -34,7 +52,10 @@ class ErrorHandler {
       if (errorMassege.contains('Timeout')) {
         return Failure(failureMessage: LocaleKeys.deadline.tr());
       }
-      return Failure(failureMessage: LocaleKeys.exception.tr());
+      return Failure(
+        failureMessage: LocaleKeys.exception.tr(),
+        statusCode: statusCode,
+      );
     }
 
     return Failure(failureMessage: LocaleKeys.unexpected.tr());

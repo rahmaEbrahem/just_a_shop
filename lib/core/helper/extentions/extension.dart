@@ -9,8 +9,8 @@ extension Navigation on BuildContext {
     return Navigator.pop(this);
   }
 
-  dynamic pushNamedAndRemoveUntil(String route, bool predicate) {
-    return Navigator.pushNamedAndRemoveUntil(this, route, (v) => predicate);
+  dynamic pushNamedAndRemoveUntil(String route, RoutePredicate predicate) {
+    return Navigator.pushNamedAndRemoveUntil(this, route, predicate);
   }
 
   void pushReplacemetNamed(String route) {

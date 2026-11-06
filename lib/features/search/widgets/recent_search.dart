@@ -110,7 +110,7 @@ class _RecentSearchState extends State<RecentSearch> {
                             recentSearches[index],
                             style: const TextStyle(
                               fontSize: 16,
-                              color: Colors.black87,
+                              color: Colors.grey,
                             ),
                           ),
                         ),

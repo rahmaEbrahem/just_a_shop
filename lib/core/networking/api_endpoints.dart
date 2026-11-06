@@ -5,4 +5,5 @@ class ApiEndpoints {
   static final String allproductendpoints = "/products";
   static final String getuserdata = "/auth/me";
   static final String updateuserdata = "/users/";
+  static const String refreshTokenEndpoint = "/auth/refresh";
 }

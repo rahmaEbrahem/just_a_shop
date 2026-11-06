@@ -101,6 +101,6 @@
 "currency": "EGP",
 "checkout": "Checkout",
 "orderSuccess": "Order placed successfully!",
-"unnamedProduct": "Unnamed product"
-
+"unnamedProduct": "Unnamed product",
+"logoutconfirmation": "Are you sure you want to log out?"
 }
