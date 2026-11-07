@@ -1,4 +1,3 @@
-
 # Android / Gradle
 
 /.gradle
@@ -62,3 +61,10 @@ app.*.map.json
 
 # Local debug logs
 /build_log.txt
+
+# macOS & iOS Build Artifacts & Pods
+/macos/Flutter/GeneratedPluginRegistrant.swift
+ios/Podfile.lock
+macos/Podfile.lock
+/ios/SourcePackages/
+/macos/SourcePackages/

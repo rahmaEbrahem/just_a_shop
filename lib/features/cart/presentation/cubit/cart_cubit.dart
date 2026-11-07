@@ -42,6 +42,11 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
+  void emptyCart() {
+    _items.clear();
+    _emitCartUpdated();
+  }
+
   Future<void> simulateCheckout() async {
     if (_items.isEmpty) return;
 
