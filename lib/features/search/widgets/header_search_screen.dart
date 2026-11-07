@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/core/app_widgets/app_bottom_nav_bar.dart';
 import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/search/presentation/cubit/product_cubit.dart';
+import 'package:e_commerce_app/gen/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +35,7 @@ class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 110),
               child: Text(
-                "Search",
+                LocaleKeys.search.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight(700),
                   fontSize: 25,
@@ -47,6 +49,7 @@ class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
           padding: const EdgeInsets.all(16),
           child: TextFormField(
             controller: widget.controller,
+            style: const TextStyle(color: Colors.black, fontSize: 14),
             onChanged: (value) {
               if (value.trim().isEmpty) {
                 context.read<ProductCubit>().searchProducts('');

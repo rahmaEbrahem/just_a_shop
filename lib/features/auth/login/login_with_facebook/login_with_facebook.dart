@@ -95,7 +95,7 @@ Future<User?> signInWithFacebook(BuildContext context) async {
           ),
         );
 
-        context.pushNamedAndRemoveUntil(Routes.navscreen, false);
+        context.pushNamedAndRemoveUntil(Routes.navscreen, (route) => false);
       }
 
       return userCredential.user;

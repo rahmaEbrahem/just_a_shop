@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserStorage {
@@ -48,5 +49,20 @@ class UserStorage {
     await prefs.remove("firstName");
     await prefs.remove("lastName");
     await prefs.remove("email");
+  }
+
+  static Future<void> saveOnboardingCompleted() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('onboardingCompleted', true);
+  }
+
+  static Future<bool> isOnboardingCompleted() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('onboardingCompleted') ?? false;
+  }
+
+  static Future<void> logout() async {
+    await SecureStorage.deleteTokens();
+    await clearUser();
   }
 }

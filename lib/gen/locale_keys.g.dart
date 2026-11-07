@@ -108,4 +108,5 @@ abstract class LocaleKeys {
   static const checkout = 'checkout';
   static const orderSuccess = 'orderSuccess';
   static const unnamedProduct = 'unnamedProduct';
+  static const logoutconfirmation = 'logoutconfirmation';
 }

@@ -114,5 +114,6 @@
 "Please enter your phone number":"يرجى إدخال رقم هاتفك",
 "Proceed to payment":"انتقل إلى الدفع",
 "Address":"عنوان",
-"Please enter your address":"يرجي ادخال العنوان"
+"Please enter your address":"يرجي ادخال العنوان",
+"logoutconfirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
 }

@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/app_start_screen.dart';
+import 'package:e_commerce_app/core/routes/app_navigator.dart';
 import 'package:e_commerce_app/core/routes/app_routes.dart';
 import 'package:e_commerce_app/core/storage/settings_storage.dart';
 import 'package:e_commerce_app/core/theme/cubit/theme_cubit.dart';
@@ -23,6 +25,7 @@ class ECommerceApp extends StatelessWidget {
             builder: (context, State) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
+                navigatorKey: AppNavigator.navigatorKey,
                 onGenerateRoute: AppRoutes.onGenerateRoute,
                 theme: context.read<ThemeCubit>().apptheme.copyWith(
                   textTheme: context
@@ -38,7 +41,7 @@ class ECommerceApp extends StatelessWidget {
                 localizationsDelegates: context.localizationDelegates,
                 supportedLocales: context.supportedLocales,
                 locale: context.locale,
-                home: ThemeLanguageChoose(),
+                home: const AppStartScreen(),
               );
             },
           ),

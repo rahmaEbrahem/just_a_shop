@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/core/app_widgets/divider/app_divider.dart';
 import 'package:e_commerce_app/core/helper/extentions/extension.dart';
 import 'package:e_commerce_app/core/routes/routes.dart';
+import 'package:e_commerce_app/core/secure_storage/user_storage.dart';
 import 'package:e_commerce_app/features/profile/presentation/ui/widgets/language_dialog.dart';
 import 'package:e_commerce_app/features/profile/presentation/ui/widgets/profile_header.dart';
 import 'package:e_commerce_app/features/profile/presentation/ui/widgets/profile_menu_item.dart';
@@ -74,8 +75,37 @@ class ProfileScreen extends StatelessWidget {
               title: LocaleKeys.logout.tr(),
               iconColor: Theme.of(context).colorScheme.error,
               trailing: const SizedBox.shrink(),
-              onTap: () {
-                // We will implement logout after reviewing auth flow.
+              onTap: () async {
+                final confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (dialogContext) {
+                    return AlertDialog(
+                      title: Text(LocaleKeys.logout.tr()),
+                      content: Text(LocaleKeys.logoutconfirmation.tr()),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(dialogContext, false),
+                          child: Text(LocaleKeys.cancel.tr()),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(dialogContext, true),
+                          child: Text(LocaleKeys.logout.tr()),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                if (confirm != true || !context.mounted) return;
+
+                await UserStorage.logout();
+
+                if (!context.mounted) return;
+
+                context.pushNamedAndRemoveUntil(
+                  Routes.loginscreen,
+                  (route) => false,
+                );
               },
             ),
           ],

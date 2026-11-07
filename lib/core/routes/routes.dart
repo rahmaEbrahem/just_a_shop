@@ -5,7 +5,7 @@ class Routes {
   static const String loginscreen = "loginscreen";
   static const String homescreen = "homescreen";
   static const String categoriesscreen = "categoriesscreen";
-  static const String searchscreen = " searchscreen";
+  static const String searchscreen = "searchscreen";
   static const String cartscreen = "cartscreen";
   static const String profilescreen = "profilescreen";
   static const String navscreen = "navscreen";

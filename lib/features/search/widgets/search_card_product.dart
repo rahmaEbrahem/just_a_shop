@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchProductCard extends StatelessWidget {
   final String imageUrl;
@@ -39,7 +40,7 @@ class SearchProductCard extends StatelessWidget {
                     const Icon(Icons.error),
               ),
             ),
-            const SizedBox(width: 12),
+            12.horizontalSpace,
 
             Expanded(
               child: Column(
@@ -50,9 +51,10 @@ class SearchProductCard extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
+                      color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  4.verticalSpace,
                   Text(
                     price,
                     style: const TextStyle(color: Colors.grey, fontSize: 14),

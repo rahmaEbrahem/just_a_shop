@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/core/app_widgets/app_container.dart';
 import 'package:e_commerce_app/core/helper/extentions/extension.dart';
 import 'package:e_commerce_app/core/routes/routes.dart';
+import 'package:e_commerce_app/core/secure_storage/user_storage.dart';
 import 'package:e_commerce_app/features/onboarding/presentation/ui/widgets/indicator_container.dart';
 import 'package:e_commerce_app/features/onboarding/presentation/ui/widgets/onboarding_item.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
@@ -99,7 +100,11 @@ class _OnboardingState extends State<Onboarding> {
               40.verticalSpace,
               AppContainer(
                 text: LocaleKeys.getbutton.tr(),
-                onTap: () {
+                onTap: () async {
+                  await UserStorage.saveOnboardingCompleted();
+
+                  if (!context.mounted) return;
+
                   context.pushReplacemetNamed(Routes.loginscreen);
                 },
               ),

@@ -1,6 +1,6 @@
 # 🛍️ Just a Shop
 
-**Just a Shop** is a Flutter-based e-commerce mobile application designed to provide a simple and user-friendly shopping experience. The project focuses on modern UI design, API integration, authentication, localization, state management, and maintainable code.
+**Just a Shop** is a Flutter-based e-commerce mobile application designed to provide a simple and user-friendly shopping experience. It features modern UI design, product browsing, API integration, authentication, localization, state management, and maintainable code.
 
 ## ✨ Features
 
@@ -10,17 +10,19 @@
 - Responsive UI using Flutter ScreenUtil.
 - Light and dark theme support.
 - Arabic and English language support.
-- Persistent theme and language preferences.
+- Persistent theme and language preferences using Hive.
 - Home screen with a promotional banner.
-- Home header and search bar.
+- Home header with search and sorting options.
+- Product and category browsing.
 - Bottom navigation bar.
 
 ### 🔐 Authentication
-- User registration and login using an API.
+- User registration and login using a REST API.
 - Google Sign-In using Firebase Authentication.
 - Facebook Login using Firebase Authentication.
 - Authentication error handling.
-- Social authentication integration and credential-linking troubleshooting.
+- Loading states during authentication.
+- Secure session management and persistent login.
 
 ### 🛒 Products & Categories
 - Fetch and display products from the DummyJSON API.
@@ -34,9 +36,8 @@
 
 ### 💾 Data Storage
 - **Hive & Hive Flutter:** Store user preferences, including theme and language settings.
-- **Flutter Secure Storage:** Store access and refresh tokens securely.
+- **Flutter Secure Storage:** Securely store access and refresh tokens.
 - **SharedPreferences:** Store selected data returned by the API.
-
 ## 🛠️ Technologies & Packages
 
 | Technology / Package | Purpose |
@@ -57,20 +58,28 @@
 | Flutter ScreenUtil | Responsive UI adaptation |
 | Flutter Native Splash | Native splash screen configuration |
 | Flutter SVG | Rendering SVG assets |
-| Build Runner | Running code-generation tools when required |
+| Build Runner | Generating Hive Type Adapters|
+| Paymob | Payment gateway integration |
+| flutter_inappwebview | Displaying the payment gateway inside the app |
 | Git & GitHub | Version control and team collaboration |
 
 ## 🌐 API Integration
 
-The application uses the [DummyJSON Products API](https://dummyjson.com/docs/products) to retrieve product and category data.
+The application uses the DummyJSON REST API with Dio for product management and simulated authentication.
 
-API integration supports:
-- Product listing.
-- Category browsing.
-- Product search.
-- Price sorting.
-- Pagination.
+### Products API
+- Fetch and display products.
+- View product details.
+- Browse categories and filter products by category.
+- Search for products.
+- Sort products by price (low to high and high to low).
+- Pagination for loading more products.
 - Error handling and retry functionality.
+
+### Authentication API
+- User login using email and password.
+- Simulated user registration using the Add User endpoint.
+- Access and refresh token handling.
 
 ## 🚀 Installation & Setup
 
@@ -81,6 +90,7 @@ Make sure you have the following installed:
 - Flutter SDK
 - Dart SDK (included with Flutter)
 - Android Studio or VS Code
+- Android SDK
 - Git
 
 ### 1. Clone the Repository
@@ -103,7 +113,7 @@ flutter pub get
 
 ### 4. Generate Required Files
 
-Run the following command to generate required files for packages that use code generation, when applicable:
+Run the following command to generate required files for packages that use code generation:
 
 ```bash
 dart run build_runner build --delete-conflicting-outputs
@@ -123,7 +133,9 @@ Make sure the translation files exist in the configured source directory.
 
 Configure Firebase for your target platform and add the required platform-specific configuration files.
 
-Enable and configure the authentication providers used by the application, including Google and Facebook.
+Enable and configure the authentication providers used by the application:
+- Google Sign-In.
+- Facebook Login.
 
 For setup instructions, refer to the [Firebase Flutter documentation](https://firebase.google.com/docs/flutter/setup).
 
@@ -137,32 +149,57 @@ Connect an Android device or start an emulator, then execute:
 flutter run
 ```
 
+
+
 ## 📸 Screenshots
 
-Screenshots of the application will be added here to showcase the onboarding, authentication, home screen, categories, and product browsing experience.
+The following screenshots showcase the application in both themes and languages:
+
+- **Dark Theme:** Arabic.
+- **Light Theme:** English.
+
+| Screen | Dark Theme (Arabic) | Light Theme (English) |
+|---|---|---|
+| Splash | ![Dark Splash](screenshots/dark/splas-d.jpeg) | ![Light Splash](screenshots/light/splash-l.jpeg) |
+| Preferences | ![Dark Preferences](screenshots/dark/prefernce-d.jpeg) | ![Light Preferences](screenshots/light/preference-l.jpeg) |
+| Onboarding | ![Dark Onboarding](screenshots/dark/onboarding-d.jpeg) | ![Light Onboarding](screenshots/light/onboarding-l.jpeg) |
+| Login | ![Dark Login](screenshots/dark/login-d.jpeg) | ![Light Login](screenshots/light/login-l.jpeg) |
+| Home | ![Dark Home](screenshots/dark/home-d.jpeg) | ![Light Home](screenshots/light/home-l.jpeg) |
+| Categories | ![Dark Categories](screenshots/dark/category-d.jpeg) | ![Light Categories](screenshots/light/category-l.jpeg) |
+| Search | ![Dark Search](screenshots/dark/search-d.jpeg) | ![Light Search](screenshots/light/search-l.jpeg) |
+| Product Details | ![Dark Product Details](screenshots/dark/productdetails-d.jpeg) | ![Light Product Details](screenshots/light/productdetails-l.jpeg) |
+| Cart | ![Dark Cart](screenshots/dark/cart-d.jpeg) | ![Light Cart](screenshots/light/cart-l.jpeg) |
+| Profile | ![Dark Profile](screenshots/dark/profile-d.jpeg) | ![Light Profile](screenshots/light/profile-l.jpeg) |
+| Payment | ![Dark Payment](screenshots/dark/pay-d.jpeg) | ![Light Payment](screenshots/light/pay-l.jpeg) |
+
 
 ## 🧩 Challenges & Solutions
 
-During development, several technical challenges were addressed, including:
+During development, several technical challenges were encountered and resolved, including:
 
-- Resolving Android project configuration and embedding issues.
-- Troubleshooting Google and Facebook authentication and credential-linking conflicts.
-- Fixing UI layout issues and `RenderFlex` overflow.
-- Resolving a Home search bar runtime issue related to Material widgets.
-- Improving product loading, error handling, and retry behavior.
+- Resolving Android embedding and build configuration issues.
+- Troubleshooting Firebase Authentication issues related to Facebook account linking and credential conflicts.
+- Handling weak network connections by implementing loading states, error handling, and retry functionality for failed requests.
+- Fixing UI layout issues and `RenderFlex` overflow errors.
+- Resolving a Home search bar runtime issue related to missing Material widgets.
 - Fixing the splash screen logo display issue.
+- Resolving Android build compatibility issues related to the payment WebView library.
+
+
 
 ## 🤝 Teamwork & Version Control
 
 The project was developed collaboratively using Git and GitHub, with feature branches, code reviews, and pull requests to manage changes and integrate team contributions.
 
-## 👩‍💻 Developer
+## 👩‍💻 Team Members
 
-**Rahma Ebrahem Mohamed**
+- Rahma Ebrahem 
+- Mariam Mohemed
+- Heba Rostom
 
-Flutter Developer
+## 🔗 GitHub Repository
 
-[GitHub Repository](https://github.com/rahmaEbrahem/just_a_shop)
+[Just a Shop Repository](https://github.com/rahmaEbrahem/just_a_shop)
 
 ---
 
