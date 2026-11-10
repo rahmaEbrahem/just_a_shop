@@ -72,63 +72,108 @@ class CartScreen extends StatelessWidget {
                       builder: (sheetContext) {
                         return PaymentScreen(
                           total: state.total,
-                          onProceedToPayment: ({
-                            required amount,
-                            required firstName,
-                            required lastName,
-                            required email,
-                            required phone,
-                          }) async {
-                            if (Navigator.canPop(sheetContext)) {
-                              Navigator.pop(sheetContext);
-                            }
+                          onProceedToPayment:
+                              ({
+                                required amount,
+                                required firstName,
+                                required lastName,
+                                required email,
+                                required phone,
+                              }) async {
+                                final url = Uri.parse(
+                                  'https://paymob-mock-backend.vercel.app/api/create-payment',
+                                );
 
-                            final url = Uri.parse(
-                              'https://paymob-mock-backend.vercel.app/api/create-payment',
-                            );
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (dialogContext) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                                bool isLoadingDialogOpen = true;
 
-                            try {
-                              final response = await http.post(
-                                url,
-                                headers: {'Content-Type': 'application/json'},
-                                body: jsonEncode({
-                                  'amount': amount,
-                                  'firstName': firstName,
-                                  'lastName': lastName,
-                                  'email': email,
-                                  'phone': phone,
-                                }),
-                              );
+                                try {
+                                  final response = await http.post(
+                                    url,
+                                    headers: {
+                                      'Content-Type': 'application/json',
+                                    },
+                                    body: jsonEncode({
+                                      'amount': amount,
+                                      'firstName': firstName,
+                                      'lastName': lastName,
+                                      'email': email,
+                                      'phone': phone,
+                                    }),
+                                  );
 
-                              final data = jsonDecode(response.body);
+                                  final data = jsonDecode(response.body);
 
-                              if (data['success'] == true) {
-                                String paymentKey = data['payment_key'];
-                                String paymentUrl =
-                                    "https://accept.paymob.com/api/acceptance/iframes/1093635?payment_token=$paymentKey";
+                                  if (!context.mounted) return;
 
-                                Future.delayed(
-                                  const Duration(milliseconds: 150),
-                                  () {
-                                    AppNavigator.navigatorKey.currentState?.push(
-                                      MaterialPageRoute(
-                                        builder: (context) => PaymobWebview(
-                                          paymentUrl: paymentUrl,
-                                          onPaymentFinished: () {
-                                            cartCubit.emptyCart();
-                                          },
+                                  // Close Loading Dialog
+                                  Navigator.of(
+                                    context,
+                                    rootNavigator: true,
+                                  ).pop();
+                                  isLoadingDialogOpen = false;
+
+                                  if (data['success'] == true) {
+                                    final String paymentKey =
+                                        data['payment_key'];
+                                    final String paymentUrl =
+                                        "https://accept.paymob.com/api/acceptance/iframes/1093635?payment_token=$paymentKey";
+
+                                    Future.delayed(
+                                      const Duration(milliseconds: 150),
+                                      () {
+                                        AppNavigator.navigatorKey.currentState
+                                            ?.push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PaymobWebview(
+                                                      paymentUrl: paymentUrl,
+                                                      onPaymentFinished: () {
+                                                        cartCubit.emptyCart();
+                                                      },
+                                                    ),
+                                              ),
+                                            );
+                                      },
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          data['message']?.toString() ??
+                                              'Payment failed. Please try again.',
                                         ),
+                                        backgroundColor: Colors.red,
                                       ),
                                     );
-                                  },
-                                );
-                              } else {
-                                print("Error: ${data['message']}");
-                              }
-                            } catch (e) {
-                              print("Network Error: $e");
-                            }
-                          },
+                                  }
+                                } catch (e) {
+                                  if (!context.mounted) return;
+
+                                  // Close Loading Dialog
+                                  if (isLoadingDialogOpen) {
+                                    Navigator.of(
+                                      context,
+                                      rootNavigator: true,
+                                    ).pop();
+                                    isLoadingDialogOpen = false;
+                                  }
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Connection error. Please try again.',
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              },
                         );
                       },
                     );

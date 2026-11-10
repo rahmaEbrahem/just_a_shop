@@ -6,8 +6,8 @@ import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/auth/login/login_with_facebook/login_with_facebook.dart';
 import 'package:e_commerce_app/features/auth/login/login_with_google/login_with_google.dart';
 import 'package:e_commerce_app/features/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/LoginFormFields.dart';
-import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/SocialLoginSection.dart';
+import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/login_form_fields.dart';
+import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/social_login_section.dart';
 import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/login_bloc_listener.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   40.verticalSpace,
 
-                    LoginFormFields(
+                  LoginFormFields(
                     nameController: namecontroller,
                     passwordController: passwordcontroller,
                   ),
@@ -101,7 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         final user = await signInWithFacebook(context);
                         if (!mounted) return;
                         if (user != null) {
-                          debugPrint('Facebook login successful: ${user.email}');
+                          debugPrint(
+                            'Facebook login successful: ${user.email}',
+                          );
                           return;
                         }
                         if (pendingFacebookCredential != null) {
@@ -109,16 +111,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             context: context,
                             builder: (dialogContext) {
                               return AlertDialog(
-                                title: Text(LocaleKeys.accountAlreadyExists.tr()),
-                                content: Text(LocaleKeys.accountAlreadyExistsMessage.tr()),
+                                title: Text(
+                                  LocaleKeys.accountAlreadyExists.tr(),
+                                ),
+                                content: Text(
+                                  LocaleKeys.accountAlreadyExistsMessage.tr(),
+                                ),
                                 actions: [
                                   TextButton(
-                                    onPressed: () => Navigator.of(dialogContext).pop(false),
+                                    onPressed: () =>
+                                        Navigator.of(dialogContext).pop(false),
                                     child: Text(LocaleKeys.cancel.tr()),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () => Navigator.of(dialogContext).pop(true),
-                                    child: Text(LocaleKeys.continueWithGoogle.tr()),
+                                    onPressed: () =>
+                                        Navigator.of(dialogContext).pop(true),
+                                    child: Text(
+                                      LocaleKeys.continueWithGoogle.tr(),
+                                    ),
                                   ),
                                 ],
                               );
@@ -134,7 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             try {
                               await signInWithGoogle(context);
                             } finally {
-                              if (mounted) setState(() => isGoogleLoading = false);
+                              if (mounted)
+                                setState(() => isGoogleLoading = false);
                             }
                           }
                           return;
@@ -150,7 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(LocaleKeys.facebookLoginFailed.tr()),
+                              content: Text(
+                                LocaleKeys.facebookLoginFailed.tr(),
+                              ),
                               backgroundColor: AppColor.containercolor,
                             ),
                           );
