@@ -7,7 +7,15 @@
 ### ☀️ Light Theme
 
 
+https://github.com/user-attachments/assets/c89cd9be-a234-410a-bc75-4f1f255f17f5
+
+
+
 ### 🌙 Dark Theme
+
+
+https://github.com/user-attachments/assets/72accfca-b36a-4c24-b4ac-8934e916cd1f
+
 
 
 ## ✨ Features
