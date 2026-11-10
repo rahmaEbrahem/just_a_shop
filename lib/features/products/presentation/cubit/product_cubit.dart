@@ -16,26 +16,49 @@ class ProductCubit extends Cubit<ProductState> {
   bool isLoadingMore = false;
   bool hasMoreProducts = true;
   List<ProductModel> allProducts = [];
+  bool isShowingCachedProducts = false;
   ProductSortOrder? currentSortOrder;
 
   Future<void> getProducts() async {
-    emit(ProductLoading());
+    // Show full loading only when there are no products to display.
+    if (allProducts.isEmpty) {
+      emit(ProductLoading());
+    }
 
     try {
-      final products = await ProductRepo.getProducts(
+      final result = await ProductRepo.getProducts(
         limit: limit,
         skip: 0,
         sortOrder: currentSortOrder,
       );
 
-      allProducts = products;
+      allProducts = result.products;
+      isShowingCachedProducts = result.isFromCache;
       skip = allProducts.length;
-      hasMoreProducts = products.length == limit;
 
-      emit(ProductSuccess(List.of(allProducts)));
+      hasMoreProducts = !result.isFromCache && result.products.length == limit;
+
+      emit(
+        ProductSuccess(
+          List.of(allProducts),
+          isFromCache: isShowingCachedProducts,
+          hasConnectionError: result.isFromCache,
+        ),
+      );
     } catch (e) {
-      final failure = ErrorHandler.handle(e);
-      emit(ProductError(failure));
+      if (allProducts.isNotEmpty) {
+        // Keep the already displayed products.
+        emit(
+          ProductSuccess(
+            List.of(allProducts),
+            isFromCache: isShowingCachedProducts,
+            hasConnectionError: true,
+          ),
+        );
+      } else {
+        final failure = ErrorHandler.handle(e);
+        emit(ProductError(failure));
+      }
     }
   }
 
@@ -64,20 +87,25 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductLoadingMore(List.of(allProducts)));
 
     try {
-      final newProducts = await ProductRepo.getProducts(
+      final result = await ProductRepo.getProducts(
         limit: limit,
         skip: skip,
         sortOrder: currentSortOrder,
       );
 
-      allProducts.addAll(newProducts);
+      allProducts.addAll(result.products);
       skip = allProducts.length;
-      hasMoreProducts = newProducts.length == limit;
+      hasMoreProducts = result.products.length == limit;
 
       emit(ProductSuccess(List.of(allProducts)));
     } catch (e) {
-      final failure = ErrorHandler.handle(e);
-      emit(ProductError(failure));
+      emit(
+        ProductSuccess(
+          List.of(allProducts),
+          isFromCache: false,
+          hasConnectionError: true,
+        ),
+      );
     } finally {
       isLoadingMore = false;
     }

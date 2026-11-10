@@ -22,7 +22,42 @@ class CategoryProductBlocBuilder extends StatelessWidget {
             return Center(child: Text(LocaleKeys.noproduct.tr()));
           }
 
-          return ListProducts(products: state.products, isScrollable: true);
+          return Column(
+            children: [
+              if (state.hasConnectionError)
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  color: Colors.orange.shade100,
+                  child: Column(
+                    children: [
+                      Text(
+                        state.isFromCache
+                            ? 'You are offline. Showing saved products.'
+                            : 'Connection problem. Showing available products.',
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      TextButton.icon(
+                        onPressed: () {
+                          context.read<CategoryProductCubit>().retryGetProducts(
+                            category,
+                          );
+                        },
+                        icon: const Icon(Icons.refresh),
+                        label: const Text('Retry'),
+                      ),
+                    ],
+                  ),
+                ),
+              Expanded(
+                child: ListProducts(
+                  products: state.products,
+                  isScrollable: true,
+                ),
+              ),
+            ],
+          );
         }
 
         if (state is CategoryProductError) {

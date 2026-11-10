@@ -9,7 +9,14 @@ final class CategoryProductLoading extends CategoryProductState {}
 
 final class CategoryProductSuccess extends CategoryProductState {
   final List<ProductModel> products;
-  CategoryProductSuccess(this.products);
+  final bool isFromCache;
+  final bool hasConnectionError;
+
+  CategoryProductSuccess(
+    this.products, {
+    this.isFromCache = false,
+    this.hasConnectionError = false,
+  });
 }
 
 final class CategoryProductError extends CategoryProductState {

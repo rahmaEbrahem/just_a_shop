@@ -9,15 +9,54 @@ part 'category_product_state.dart';
 
 class CategoryProductCubit extends Cubit<CategoryProductState> {
   CategoryProductCubit() : super(CategoryProductInitial());
+
+  List<ProductModel> allProducts = [];
+  String? currentCategory;
+  bool isShowingCachedProducts = false;
+
   Future<void> getProductsByCategory(String category) async {
-    emit(CategoryProductLoading());
+    if (currentCategory != category) {
+      allProducts = [];
+      isShowingCachedProducts = false;
+    }
+    currentCategory = category;
+
+    // Don't hide existing products during retry.
+    if (allProducts.isEmpty) {
+      emit(CategoryProductLoading());
+    }
 
     try {
-      final products = await ProductRepo.getProductsByCategory(category);
-      emit(CategoryProductSuccess(products));
+      final result = await ProductRepo.getProductsByCategory(category);
+
+      print('CATEGORY PRODUCTS COUNT: ${result.products.length}');
+      print('CATEGORY IS FROM CACHE: ${result.isFromCache}');
+
+      allProducts = result.products;
+      isShowingCachedProducts = result.isFromCache;
+
+      emit(
+        CategoryProductSuccess(
+          List.of(allProducts),
+          isFromCache: isShowingCachedProducts,
+          hasConnectionError: result.isFromCache,
+        ),
+      );
     } catch (e) {
-      final failure = ErrorHandler.handle(e);
-      emit(CategoryProductError(failure));
+      print('CATEGORY PRODUCTS ERROR: $e');
+
+      if (allProducts.isNotEmpty) {
+        emit(
+          CategoryProductSuccess(
+            List.of(allProducts),
+            isFromCache: isShowingCachedProducts,
+            hasConnectionError: true,
+          ),
+        );
+      } else {
+        final failure = ErrorHandler.handle(e);
+        emit(CategoryProductError(failure));
+      }
     }
   }
 

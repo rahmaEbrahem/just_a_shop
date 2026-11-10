@@ -9,13 +9,20 @@ class ProductLoading extends ProductState {}
 
 class ProductLoadingMore extends ProductState {
   final List<ProductModel> products;
-  ProductLoadingMore(this.products);
+  final bool isFromCache;
+  ProductLoadingMore(this.products, {this.isFromCache = false});
 }
 
 class ProductSuccess extends ProductState {
   final List<ProductModel> products;
+  final bool isFromCache;
+  final bool hasConnectionError;
 
-  ProductSuccess(this.products);
+  ProductSuccess(
+    this.products, {
+    this.isFromCache = false,
+    this.hasConnectionError = false,
+  });
 }
 
 class ProductError extends ProductState {

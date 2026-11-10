@@ -2,6 +2,14 @@
 
 **Just a Shop** is a Flutter-based e-commerce mobile application designed to provide a simple and user-friendly shopping experience. It features modern UI design, product browsing, API integration, authentication, localization, state management, and maintainable code.
 
+## 🎥 App Demo
+
+### ☀️ Light Theme
+
+
+### 🌙 Dark Theme
+
+
 ## ✨ Features
 
 ### 🎨 UI & User Experience
@@ -35,9 +43,30 @@
 - Retry failed API requests.
 
 ### 💾 Data Storage
-- **Hive & Hive Flutter:** Store user preferences, including theme and language settings.
+- **Hive & Hive Flutter:** Store user preferences, including theme and language settings, and cache products and categories locally.
 - **Flutter Secure Storage:** Securely store access and refresh tokens.
 - **SharedPreferences:** Store selected data returned by the API.
+
+### 📶 Offline Support & Local Caching
+
+- Local product caching using Hive.
+
+- Cache the first page of All Products.
+
+- Cache products separately for each category using unique cache keys.
+
+- Cache category lists for offline access.
+
+- Automatically load saved products when API requests fail.
+
+- Display cached products while offline without losing previously loaded data.
+
+- Show connection status messages with a Retry button.
+
+- Retry failed API requests and refresh product data when the connection is restored.
+
+- Keep cached content available during temporary network failures.
+
 ## 🛠️ Technologies & Packages
 
 | Technology / Package | Purpose |
@@ -50,7 +79,7 @@
 | Firebase Authentication | Authentication integration |
 | Google Sign-In | Google authentication |
 | Flutter Facebook Auth | Facebook authentication |
-| Hive | Local storage for app preferences |
+| Hive |Local storage, user preferences, and offline product caching |
 | Hive Flutter | Hive integration with Flutter |
 | SharedPreferences | Simple key-value storage |
 | Flutter Secure Storage | Secure token storage |
@@ -75,6 +104,7 @@ The application uses the DummyJSON REST API with Dio for product management and 
 - Sort products by price (low to high and high to low).
 - Pagination for loading more products.
 - Error handling and retry functionality.
+- Offline fallback using locally cached product data.
 
 ### Authentication API
 - User login using email and password.
@@ -164,9 +194,9 @@ The following screenshots showcase the application in both themes and languages:
 | Preferences | ![Dark Preferences](screenshots/dark/prefernce-d.jpeg) | ![Light Preferences](screenshots/light/preference-l.jpeg) |
 | Onboarding | ![Dark Onboarding](screenshots/dark/onboarding-d.jpeg) | ![Light Onboarding](screenshots/light/onboarding-l.jpeg) |
 | Login | ![Dark Login](screenshots/dark/login-d.jpeg) | ![Light Login](screenshots/light/login-l.jpeg) |
-| Home | ![Dark Home](screenshots/dark/home-d.jpeg) | ![Light Home](screenshots/light/home-l.jpeg) |
+| Home | ![Dark Home](screenshots\dark\home-d.jpeg) | ![Light Home](screenshots\light\home-l.jpeg) |
 | Categories | ![Dark Categories](screenshots/dark/category-d.jpeg) | ![Light Categories](screenshots/light/category-l.jpeg) |
-| Search | ![Dark Search](screenshots/dark/search-d.jpeg) | ![Light Search](screenshots/light/search-l.jpeg) |
+| Search | ![Dark Search](screenshots\dark\search-d.jpeg) | ![Light Search](screenshots\light\search-l.jpeg) |
 | Product Details | ![Dark Product Details](screenshots/dark/productdetails-d.jpeg) | ![Light Product Details](screenshots/light/productdetails-l.jpeg) |
 | Cart | ![Dark Cart](screenshots/dark/cart-d.jpeg) | ![Light Cart](screenshots/light/cart-l.jpeg) |
 | Profile | ![Dark Profile](screenshots/dark/profile-d.jpeg) | ![Light Profile](screenshots/light/profile-l.jpeg) |
