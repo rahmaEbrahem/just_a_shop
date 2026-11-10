@@ -32,9 +32,6 @@ class ProductCubit extends Cubit<ProductState> {
         sortOrder: currentSortOrder,
       );
 
-      print('CUBIT PRODUCTS COUNT: ${result.products.length}');
-      print('IS FROM CACHE: ${result.isFromCache}');
-
       allProducts = result.products;
       isShowingCachedProducts = result.isFromCache;
       skip = allProducts.length;
@@ -49,8 +46,6 @@ class ProductCubit extends Cubit<ProductState> {
         ),
       );
     } catch (e) {
-      print('GET PRODUCTS ERROR: $e');
-
       if (allProducts.isNotEmpty) {
         // Keep the already displayed products.
         emit(
@@ -104,8 +99,6 @@ class ProductCubit extends Cubit<ProductState> {
 
       emit(ProductSuccess(List.of(allProducts)));
     } catch (e) {
-      print('LOAD MORE ERROR: $e');
-
       emit(
         ProductSuccess(
           List.of(allProducts),

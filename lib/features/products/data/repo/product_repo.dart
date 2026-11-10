@@ -59,30 +59,16 @@ class ProductRepo {
 
       if (skip == 0) {
         try {
-          print('START READING CACHE');
-
           final cachedProducts = ProductsCacheService.getProducts(cacheKey);
 
-          print('CACHE COUNT: ${cachedProducts.length}');
-
           if (cachedProducts.isNotEmpty) {
-            print('RETURNING PRODUCTS FROM CACHE');
-
             return CachedProductsResult(
               products: cachedProducts,
               isFromCache: true,
             );
           }
-
-          print('CACHE IS EMPTY');
-        } catch (cacheError, cacheStackTrace) {
-          print('CACHE READ ERROR: $cacheError');
-          print('CACHE STACK TRACE: $cacheStackTrace');
-        }
+        } catch (cacheError, cacheStackTrace) {}
       }
-
-      print('RETHROWING PRODUCT ERROR');
-      print('STACK TRACE: $stackTrace');
 
       rethrow;
     }
@@ -111,12 +97,7 @@ class ProductRepo {
 
       return CachedProductsResult(products: products, isFromCache: false);
     } catch (e) {
-      print('CATEGORY API ERROR: $e');
-      print('CATEGORY CACHE KEY: $cacheKey');
-
       final cachedProducts = ProductsCacheService.getProducts(cacheKey);
-
-      print('CATEGORY CACHE COUNT: ${cachedProducts.length}');
 
       if (cachedProducts.isNotEmpty) {
         return CachedProductsResult(

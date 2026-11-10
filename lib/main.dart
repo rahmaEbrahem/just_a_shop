@@ -17,7 +17,7 @@ void main() async {
   Hive.registerAdapter(SettingsModelAdapter());
   await Hive.openBox<SettingsModel>('settingsBox');
   await Hive.openBox('productsCacheBox');
-  final productsBox = Hive.box('productsCacheBox');
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
