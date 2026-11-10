@@ -2,6 +2,14 @@
 
 **Just a Shop** is a Flutter-based e-commerce mobile application designed to provide a simple and user-friendly shopping experience. It features modern UI design, product browsing, API integration, authentication, localization, state management, and maintainable code.
 
+## 🎥 App Demo
+
+### ☀️ Light Theme
+
+
+### 🌙 Dark Theme
+
+
 ## ✨ Features
 
 ### 🎨 UI & User Experience
@@ -186,9 +194,9 @@ The following screenshots showcase the application in both themes and languages:
 | Preferences | ![Dark Preferences](screenshots/dark/prefernce-d.jpeg) | ![Light Preferences](screenshots/light/preference-l.jpeg) |
 | Onboarding | ![Dark Onboarding](screenshots/dark/onboarding-d.jpeg) | ![Light Onboarding](screenshots/light/onboarding-l.jpeg) |
 | Login | ![Dark Login](screenshots/dark/login-d.jpeg) | ![Light Login](screenshots/light/login-l.jpeg) |
-| Home | ![Dark Home](screenshots/dark/home-d.jpeg) | ![Light Home](screenshots\light\home-l.jpeg) |
+| Home | ![Dark Home](screenshots\dark\home-d.jpeg) | ![Light Home](screenshots\light\home-l.jpeg) |
 | Categories | ![Dark Categories](screenshots/dark/category-d.jpeg) | ![Light Categories](screenshots/light/category-l.jpeg) |
-| Search | ![Dark Search](screenshots/dark/search-d.jpeg) | ![Light Search](screenshots\light\search-l.jpeg) |
+| Search | ![Dark Search](screenshots\dark\search-d.jpeg) | ![Light Search](screenshots\light\search-l.jpeg) |
 | Product Details | ![Dark Product Details](screenshots/dark/productdetails-d.jpeg) | ![Light Product Details](screenshots/light/productdetails-l.jpeg) |
 | Cart | ![Dark Cart](screenshots/dark/cart-d.jpeg) | ![Light Cart](screenshots/light/cart-l.jpeg) |
 | Profile | ![Dark Profile](screenshots/dark/profile-d.jpeg) | ![Light Profile](screenshots/light/profile-l.jpeg) |
