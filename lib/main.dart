@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/core/networking/dio_factory.dart';
 import 'package:e_commerce_app/core/storage/settings_model.dart';
 import 'package:e_commerce_app/e_commerce_app.dart';
-import 'package:e_commerce_app/features/cart/presentation/cubit/cart_cubit.dart'; 
+import 'package:e_commerce_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -16,10 +16,10 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SettingsModelAdapter());
   await Hive.openBox<SettingsModel>('settingsBox');
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  
+  await Hive.openBox('productsCacheBox');
+  final productsBox = Hive.box('productsCacheBox');
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],

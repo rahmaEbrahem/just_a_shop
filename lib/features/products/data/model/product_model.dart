@@ -24,6 +24,27 @@ class ProductModel {
     this.images,
     this.thumbnail,
   });
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'category': category,
+      'price': price,
+      'discountPercentage': discountPercentage,
+      'weight': weight,
+      'dimensions': dimensions == null
+          ? null
+          : {
+              'width': dimensions!.width,
+              'height': dimensions!.height,
+              'depth': dimensions!.depth,
+            },
+      'returnPolicy': returnPolicy,
+      'images': images,
+      'thumbnail': thumbnail,
+    };
+  }
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -35,7 +56,9 @@ class ProductModel {
 
     weight = json['weight'];
     dimensions = json['dimensions'] != null
-        ? Dimensions.fromJson(json['dimensions'])
+        ? Dimensions.fromJson(
+            Map<String, dynamic>.from(json['dimensions'] as Map),
+          )
         : null;
 
     returnPolicy = json['returnPolicy'];

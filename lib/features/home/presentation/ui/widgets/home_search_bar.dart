@@ -21,13 +21,13 @@ class HomeSearchBar extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             border: BoxBorder.all(color: AppColor.bluegreycolor),
-            color: AppColor.searchcolor,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(15.r),
           ),
           child: Row(
             children: [
               10.horizontalSpace,
-              Icon(Icons.search_outlined, color: AppColor.darkmode),
+              Icon(Icons.search_outlined, color: AppColor.searchcolor),
               20.horizontalSpace,
               Text(
                 LocaleKeys.searchproduct.tr(),
