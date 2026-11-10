@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
+import 'package:e_commerce_app/features/paymob_service/presentation/ui/widgets/payment_form_fields.dart';
 
 class PaymentScreen extends StatefulWidget {
   final double total;
@@ -93,91 +94,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                     const SizedBox(height: 24),
                     
-                    // First Name Field
-                    TextFormField(
-                      controller: firstNameController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        labelText: 'First Name'.tr(),
-                        border: const OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your first name'.tr();
-                        }
-                        return null;
-                      },
+                    // استخدام الـ Widget الجديدة للـ Form Fields
+                    PaymentFormFields(
+                      firstNameController: firstNameController,
+                      lastNameController: lastNameController,
+                      emailController: emailController,
+                      phoneController: phoneController,
+                      addressController: addressController,
                     ),
-                    const SizedBox(height: 16),
                     
-                    // Last Name Field
-                    TextFormField(
-                      controller: lastNameController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        labelText: 'Last Name'.tr(),
-                        border: const OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your last name'.tr();
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    
-                    // Email Field
-                    TextFormField(
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        labelText: 'Email'.tr(),
-                        border: const OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your email'.tr();
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    
-                    // Phone Number Field
-                    TextFormField(
-                      controller: phoneController,
-                      keyboardType: TextInputType.phone,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        labelText: 'Phone Number'.tr(),
-                        border: const OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your phone number';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-
-                    TextFormField(
-                      controller: addressController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        labelText: 'Address'.tr(),
-                        border: const OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your address'.tr();
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 14),
                     
                     // Proceed Button
                     SizedBox(
