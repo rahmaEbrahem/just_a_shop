@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/cart/data/model/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -6,7 +7,7 @@ import 'package:e_commerce_app/features/cart/presentation/cubit/cart_cubit.dart'
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 
 class CartItemCard extends StatelessWidget {
-  final dynamic item; 
+  final CartModel item;
 
   const CartItemCard({super.key, required this.item});
 
@@ -15,9 +16,7 @@ class CartItemCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
@@ -69,9 +68,9 @@ class CartItemCard extends StatelessWidget {
                       icon: const Icon(Icons.remove_circle_outline, size: 20),
                       onPressed: () {
                         context.read<CartCubit>().updateQuantity(
-                              item.id!,
-                              (item.quantity ?? 1) - 1,
-                            );
+                          item.id!,
+                          (item.quantity ?? 1) - 1,
+                        );
                       },
                     ),
                     Text(
@@ -85,9 +84,9 @@ class CartItemCard extends StatelessWidget {
                       icon: const Icon(Icons.add_circle_outline, size: 20),
                       onPressed: () {
                         context.read<CartCubit>().updateQuantity(
-                              item.id!,
-                              (item.quantity ?? 1) + 1,
-                            );
+                          item.id!,
+                          (item.quantity ?? 1) + 1,
+                        );
                       },
                     ),
                   ],

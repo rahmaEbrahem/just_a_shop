@@ -1,6 +1,4 @@
 import 'package:e_commerce_app/core/app_widgets/app_container.dart';
-import 'package:e_commerce_app/core/app_widgets/app_text_field.dart';
-import 'package:e_commerce_app/core/app_widgets/auth_container.dart';
 import 'package:e_commerce_app/core/app_widgets/divider/auth_divider.dart';
 import 'package:e_commerce_app/core/helper/extentions/extension.dart';
 import 'package:e_commerce_app/core/routes/routes.dart';
@@ -8,6 +6,8 @@ import 'package:e_commerce_app/core/theme/app_colors.dart';
 import 'package:e_commerce_app/features/auth/login/login_with_facebook/login_with_facebook.dart';
 import 'package:e_commerce_app/features/auth/login/login_with_google/login_with_google.dart';
 import 'package:e_commerce_app/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/login_form_fields.dart';
+import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/social_login_section.dart';
 import 'package:e_commerce_app/features/auth/login/presentation/ui/widgets/login_bloc_listener.dart';
 import 'package:e_commerce_app/gen/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  LoginBlocListener(),
+                  const LoginBlocListener(),
                   20.verticalSpace,
                   Text(
                     LocaleKeys.loginaccount.tr(),
@@ -61,43 +61,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   40.verticalSpace,
-                  Text(
-                    LocaleKeys.nametitle.tr(),
-                    style: Theme.of(context).textTheme.titleLarge,
+
+                  LoginFormFields(
+                    nameController: namecontroller,
+                    passwordController: passwordcontroller,
                   ),
-                  10.verticalSpace,
-                  AppTextField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return LocaleKeys.namefield.tr();
-                      }
-                      return null;
-                    },
-                    controller: namecontroller,
-                    text: LocaleKeys.namefield.tr(),
-                    keyboardtype: TextInputType.name,
-                  ),
-                  10.verticalSpace,
-                  Text(
-                    LocaleKeys.passwordtitle.tr(),
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  10.verticalSpace,
-                  AppTextField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
-                      }
-                      return null;
-                    },
-                    controller: passwordcontroller,
-                    text: LocaleKeys.paswordfield.tr(),
-                    keyboardtype: TextInputType.visiblePassword,
-                    ispassword: true,
-                  ),
+
                   40.verticalSpace,
                   AppContainer(
                     text: LocaleKeys.logintitle.tr(),
@@ -111,61 +80,32 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   20.verticalSpace,
-                  AuthDivider(),
+                  const AuthDivider(),
                   30.verticalSpace,
-
-                  AuthContainer(
-                    text: isGoogleLoading
-                        ? 'Signing in...'
-                        : LocaleKeys.googlelogin.tr(),
-                    onTap: () async {
+                  SocialLoginSection(
+                    isGoogleLoading: isGoogleLoading,
+                    isFacebookLoading: isFacebookLoading,
+                    onGoogleLogin: () async {
                       if (isGoogleLoading || isFacebookLoading) return;
-
-                      setState(() {
-                        isGoogleLoading = true;
-                      });
-
+                      setState(() => isGoogleLoading = true);
                       try {
                         await signInWithGoogle(context);
                       } finally {
-                        if (mounted) {
-                          setState(() {
-                            isGoogleLoading = false;
-                          });
-                        }
+                        if (mounted) setState(() => isGoogleLoading = false);
                       }
                     },
-                    isLoading: isGoogleLoading,
-                    enabled: !isFacebookLoading,
-                    containcolor: Colors.white,
-                    icon: 'assets/icons/google-icon-logo-svgrepo-com.svg',
-                  ),
-
-                  20.verticalSpace,
-
-                  AuthContainer(
-                    text: isFacebookLoading
-                        ? 'Signing in...'
-                        : LocaleKeys.facelogin.tr(),
-                    onTap: () async {
+                    onFacebookLogin: () async {
                       if (isGoogleLoading || isFacebookLoading) return;
-
-                      setState(() {
-                        isFacebookLoading = true;
-                      });
-
+                      setState(() => isFacebookLoading = true);
                       try {
                         final user = await signInWithFacebook(context);
-
                         if (!mounted) return;
-
                         if (user != null) {
                           debugPrint(
                             'Facebook login successful: ${user.email}',
                           );
                           return;
                         }
-
                         if (pendingFacebookCredential != null) {
                           final shouldContinue = await showDialog<bool>(
                             context: context,
@@ -179,15 +119,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 actions: [
                                   TextButton(
-                                    onPressed: () {
-                                      Navigator.of(dialogContext).pop(false);
-                                    },
+                                    onPressed: () =>
+                                        Navigator.of(dialogContext).pop(false),
                                     child: Text(LocaleKeys.cancel.tr()),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(dialogContext).pop(true);
-                                    },
+                                    onPressed: () =>
+                                        Navigator.of(dialogContext).pop(true),
                                     child: Text(
                                       LocaleKeys.continueWithGoogle.tr(),
                                     ),
@@ -196,31 +134,22 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             },
                           );
-
                           if (!mounted) return;
-
                           if (shouldContinue == true) {
                             if (isGoogleLoading) return;
-
                             setState(() {
                               isFacebookLoading = false;
                               isGoogleLoading = true;
                             });
-
                             try {
                               await signInWithGoogle(context);
                             } finally {
-                              if (mounted) {
-                                setState(() {
-                                  isGoogleLoading = false;
-                                });
-                              }
+                              if (mounted)
+                                setState(() => isGoogleLoading = false);
                             }
                           }
-
                           return;
                         }
-
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(LocaleKeys.facebookLoginFailed.tr()),
@@ -229,7 +158,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       } catch (e) {
                         debugPrint('Facebook login error: $e');
-
                         if (mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -241,17 +169,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         }
                       } finally {
-                        if (mounted) {
-                          setState(() {
-                            isFacebookLoading = false;
-                          });
-                        }
+                        if (mounted) setState(() => isFacebookLoading = false);
                       }
                     },
-                    isLoading: isFacebookLoading,
-                    enabled: !isGoogleLoading,
-                    containcolor: AppColor.secondarycolor,
-                    icon: 'assets/icons/facebook-3-logo-svgrepo-com.svg',
                   ),
 
                   30.verticalSpace,

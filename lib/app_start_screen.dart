@@ -4,7 +4,6 @@ import 'package:e_commerce_app/core/secure_storage/user_storage.dart';
 import 'package:e_commerce_app/core/storage/settings_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AppStartScreen extends StatefulWidget {
   const AppStartScreen({super.key});
